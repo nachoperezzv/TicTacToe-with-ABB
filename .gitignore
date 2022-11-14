@@ -16,7 +16,8 @@ eggs/
 .eggs/
 lib/
 include/
-scripts/
+Scripts/
+!src/scripts/
 lib64/
 parts/
 sdist/
