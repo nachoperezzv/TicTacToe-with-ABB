@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="refresh" content="5">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>sink the float</title>
+        <title>Tic Tac Toe</title>
         
 
         <!-- <link rel="shortcut icon" href="./assets/ABB-IRB-120-3-0-6-robot.ico" /> -->
@@ -17,22 +18,57 @@
             crossorigin="anonymous"
         />
 
+        <link rel="stylesheet" href="/src/styles/style.css">
+
     </head>
     <body >
         
         <!--<img src="./assets/white-paper-texture-bg.png" alt="Responsive image">-->
 
-        <div class="container my-5">
-            <nav class="navbar navbar-expand-sm bg-light justify-content-center">                
+        <div class="container-md bg-light my-2">
+            <h1>
+                <p class="text-center fs-1 font-monospace">Tic Tac Toe</p>
+            </h1>
+        </div>
+
+        <div class="container-md bg-light my-2">
+            <nav class="navbar navbar-expand-sm justify-content-center bg-light black-50">                
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a class="nav-link" href="#">ONE player</a>
+                        <a class="nav-link" href="#">
+                            <p class="text-black-50 fs-5 font-monospace ">One Player</p>
+                        </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">TWO player</a>                    
+                        <a class="nav-link" href="#">
+                            <p class="text-black-50 fs-5 font-monospace">Two Players</p>
+                        </a>         
+                    </li>      
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-black-50 fs-5 font-monospace" href="#" role="button" data-bs-toggle="dropdown">
+                            Configuración
+                        </a>
+                        <ul class="dropdown-menu fs-7 font-monospace text-black-50">
+                            <li><a class="dropdown-item" href="#">Idioma</a></li>
+                            <li><a class="dropdown-item" href="#">Conexión</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Tutorial</a></li>
+                          </ul>
+                    </li>     
                 </ul>
             </nav>
         </div>
+        
+        <div class="container-sm justify-content-between">
+            <button type="button" class="btn btn-default btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                </svg>
+            </button>            
+        </div>
+
+        
 
         <script src="/src/scripts/speech2text.js"></script>
         <script src="/src/scripts/language.js"></script>
