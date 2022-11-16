@@ -1,3 +1,6 @@
+from utils import Tablero
+from utils import Player
+
 from flask import (
     Flask, 
     jsonify,
@@ -9,10 +12,11 @@ app = Flask("servicios")
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
+
 @app.route('/')
 def main():
     return render_template('index.html')
-    
+
 
 if __name__ == '__main__':
     app.debug = True
