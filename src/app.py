@@ -17,6 +17,17 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 def main():
     return render_template('index.html')
 
+@app.route('/play/oneplayer')
+def one_player():
+    return render_template('oneplayer.html')
+
+@app.route('/play/twoplayers')
+def two_player():
+    return render_template('twoplayers.html')
+
+@app.route('/configuration')
+def configuration():
+    return render_template('config.html')
 
 if __name__ == '__main__':
     app.debug = True
