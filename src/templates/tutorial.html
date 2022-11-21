@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Tic Tac Toe</title>
+        
+        <link rel="icon" type="plantilla-icon" href="assets/ABB-IRB-120-3-0-6-robot.ico" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/src/styles/style.css">
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header
+            id="header"
+            class="container-fluid pb-1"
+            >
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+                <div class="container-fluid" id="navbar-header">      
+                    <a class="navbar-brand" href="./index.html">
+                        <img src="./assets/ABB-IRB-120-3-0-6-robot.png" alt="">
+                    </a>              
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse">
+                        <div class="navbar-nav">      
+                            <a class="nav-item nav-link" href="./index.html">Home</a>
+                            <a class="nav-item nav-link" href="./config.html">Configuración</a>
+                            <a class="nav-item nav-link active" href="./tutorial.html">Tutorial</a>
+                            <a class="nav-item nav-link" href="#footer">About</a>
+                        </div>
+                    </div>    
+                </div>
+            </nav>
+            <h1
+                id="header-title"
+                class="d-flex justify-content-center pt-5"
+                style="font-size: 400%; font-family: consolas; font-weight: bold; text-align: center;"
+                >            
+                Tic Tac Toe
+            </h1>
+            <hr class="hr" />
+        </header>
+        <!-- Header -->
+
+        <!-- Tutorials -->
+        <div 
+            class="row mx-5">
+            <!-- Tutorial Text - One Player Mode -->
+            <div
+                id="tutorial-q1-one-player-mode" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q1-one-player-mode-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ1" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Qué es el modo individual o de un jugador?
+                </p>
+                <div
+                    id="collapseQ1" 
+                    class="collapse">
+                    <p>
+                        En el modo un jugador, se compite contra el robot. Este realizará movimientos en consecuencia a sus acciones. 
+                        El jugador podrá mover ficha cuando el robot haya completado su movimiento. Esta información aparecerá en pantalla.
+                    </p>
+                </div>
+            </div>            
+            <!-- Tutorial Text - One Player Mode -->
+
+            <!-- Tutorial Text - Two Players Mode -->
+            <div
+                id="tutorial-q2-two-players-mode" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q2-two-players-mode-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ2" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Qué es el modo multijugador o de dos jugadores?
+                </p>
+                <div
+                    id="collapseQ2" 
+                    class="collapse">
+                    <p>
+                        En el modo de dos jugadores, se requieren dos usuarios. Estos moverán por turnos y el robot realizará los movmientos que se indiquen
+                        por voz o mediante Drag&Drop. Un jugador podrá mover ficha cuando el robot haya completado su movimiento.
+                        Esta información aparecerá en pantalla.
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Two Players Mode -->
+
+            <!-- Tutorial Text - Selección de Idioma -->
+            <div
+                id="tutorial-q3-select-language" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q3-select-language-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ3" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Porqué es importante seleccionar el lenguaje/idioma correcto?
+                </p>
+                <div
+                    id="collapseQ3" 
+                    class="collapse">
+                    <p>
+                        En la pantalla de configuración verá que puede escoger un idioma y un acento (si es que existe) para dicho idioma. 
+                        Debe escoger el adecuado para maximizar la función de reconocimiento de voz.
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Selección de Idioma -->
+
+            <!-- Tutorial Text - Reglas -->
+            <div
+                id="tutorial-q4-reglas" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245);"
+                >
+                <p
+                    id="tutorial-q4-reglas-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ4" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Cuáles son las reglas?
+                </p>
+                <div
+                    id="collapseQ4" 
+                    class="collapse">
+                    <p>
+                        Este es un juego de 3 en raya. Cada jugador elige las X o las O, y en su turno debe poner una, intentando,
+                        conseguir 3 seguidas en una línea vertical, horizontal o diagonal.
+                    </p>
+                    <p>
+                        En el juego normal se terminaría la partida al llenar todos los espacios, sin embargo, en este modo,
+                        cada jugador dispone de 3 fichas las cuales podrá mover a voluntad durante el transcurso de la partida hasta
+                        que consiga una línea de 3. 
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Reglas -->
+
+            <!-- Tutorial Text - Conexión -->
+            <div
+                id="tutorial-q5-conexion" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245);"
+                >
+                <p
+                    id="tutorial-q5-conexion-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ5" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Cómo sé si esta conectado el robot?
+                </p>
+                <div
+                    id="collapseQ5" 
+                    class="collapse">
+                    <p>
+                        En la pantall de configuración existe una opción de conexión. En ella se indica si existe o no conexión. 
+                        Además, se puede seleccionar la dirección de conexion, el puerto, etc.
+                    </p>
+                    <p>   
+                        Dispone también de botón de testeo, mediante el cual el robot realizará un movimiento predefinido cada
+                        vez que lo pulse. Esto, con la intención de que el usuario sepa que las ordenes están llegando de forma correcta.
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Conexión -->
+
+            <!-- Tutorial Text - Multijugador -->
+            <div
+                id="tutorial-q6-multijugador" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245);"
+                >
+                <p
+                    id="tutorial-q6-multijugador-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ6" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Se puede jugar en el modo 2 jugadores desde ordenadores diferentes?
+                </p>
+                <div
+                    id="collapseQ6" 
+                    class="collapse">
+                    <p>
+                        No. Esta opción actualmente no se encuentra disponible pero se esta trabajando en ella. 
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Multijugador -->
+        </div>
+        <!-- Tutorials -->
+
+        <!-- Footer -->
+        <footer 
+            id="the-footer"
+            class="text-center text-lg-start text-muted fixed-bottom"
+            >
+            <!-- Links -->
+            <div 
+                id="footer-links"
+                class="container-fluid text-center text-md-start" 
+                >
+                <!-- Grid row -->
+                <div class="row d-flex justify-content-center">      
+
+                    <!-- Grid column -->
+                    <div class="col-sm-4 my-3">
+                        <!-- Links -->
+                        <div class="container-fluid d-flex justify-content-center">
+                            <a href="https://new.abb.com/es" target="_blank">
+                                <img src="assets/ABB_logo.png" class="img-fluid">
+                            </a>
+                        </div>                                
+                    </div>
+            
+        
+                    <!-- Grid column -->
+                    <div class="col-sm-4 my-3">
+                        <!-- Links -->
+                        <div class="container-fluid d-flex justify-content-center">
+                            <a href="https://github.com/nachoperezzv/servicios.git" target="_blank">
+                                <img src="assets/github.png" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+        
+                    <!-- Grid column -->
+                    <div class="col-sm-4 my-3">
+                        <!-- Links -->
+                        <div class="container-fluid d-flex justify-content-center">
+                            <a href="mailto:ignacioperezzv@gmail.com" target="_blank">
+                                <img src="assets/envelope.png" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Copyright -->
+            <div 
+                id="footer-copyright"
+                class="d-flex justify-content-center pt-4 pb-3" 
+                style="text-align: center;"
+                >
+                <p> 
+                    © 2022 Copyright <br> 
+                    <img src="./assets/ua-logo.png" alt=""> Universidad de Alicante
+                </p>
+            </div>
+        </footer> 
+        <!-- Footer -->
+
+        <!-- Scripts -->
+        <script src="/src/scripts/speech2text.js"></script>
+        <script src="/src/scripts/language.js"></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous">
+        </script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous">
+        </script>
+        <!-- Scripts -->
+        
+    </body>  
+</html>

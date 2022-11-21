@@ -1,5 +1,5 @@
-var langs =
-[['Afrikaans',       ['af-ZA']],
+var langs =[
+ ['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
  ['Bahasa Melayu',   ['ms-MY']],
  ['Català',          ['ca-ES']],
@@ -60,7 +60,8 @@ var langs =
                      ['cmn-Hant-TW', '中文 (台灣)'],
                      ['yue-Hant-HK', '粵語 (香港)']],
  ['日本語',           ['ja-JP']],
- ['Lingua latīna',   ['la']]];
+ ['Lingua latīna',   ['la']]
+];
 
 let select_language = document.querySelector('#select_language');
 let select_dialect = document.querySelector('#select_dialect');
@@ -69,9 +70,9 @@ for (var i = 0; i < langs.length; i++) {
   select_language.options[i] = new Option(langs[i][0], i);
 }
 
-select_language.selectedIndex = 6;
+select_language.selectedIndex = 7;
 updateCountry();
-select_dialect.selectedIndex = 6;
+select_dialect.selectedIndex = 7;
 
 function updateCountry() {
   for (var i = select_dialect.options.length - 1; i >= 0; i--) {
