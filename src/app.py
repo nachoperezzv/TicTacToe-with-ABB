@@ -9,8 +9,8 @@ from flask import (
 )
 
 app = Flask("servicios")
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
+# app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+# ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
 
 @app.route('/')
@@ -25,7 +25,7 @@ def one_player():
 def two_player():
     return render_template('twoplayers.html')
 
-@app.route('/configuration')
+@app.route('/config')
 def configuration():
     return render_template('config.html')
 
