@@ -1,4 +1,4 @@
-from utils.player import Player
+from player import Player
 
 class Tablero():
     '''
@@ -29,9 +29,8 @@ class Tablero():
             'b1':False, 'b2':False, 'b3':False,
             'c1':False, 'c2':False, 'c3':False
         }   
-        pass
 
-    def check_position_exists(self,new_pos) -> bool:
+    def __check_position_exists(self,new_pos) -> bool:
         '''
         Comprueba que la posición que se pasa existe en el tablero. Las posición validas serás la permutación de
         las letras [A-C] y los números [1-3]
@@ -41,7 +40,7 @@ class Tablero():
         '''
         return True if self.__pos.get(new_pos,None) != None else False 
 
-    def check_position_non_occupied(self,new_pos) -> bool:
+    def __check_position_non_occupied(self,new_pos) -> bool:
         '''
         Comprueba que la ficha/token del jugador que se indica se puede mover a la nueva posición asignada.
         Es decir, comprueba que no este ocupada ya por otra ficha. 
@@ -56,21 +55,36 @@ class Tablero():
     def update_position(self,player,token,new_pos):
         '''
         Actualiza la posición en la clase tablero y la del jugador que ha movido la ficha.
-        Esta función esta planteada para que se llame después de las funciones check_position_exists() y check_position_non_occupied()
         
+        ###Esta función esta planteada para que se llame después de las funciones check_position_exists() y check_position_non_occupied()
+        
+        Para actualizar una posición antes se comprueba si existe y está ocupada
+
         params: 
             :arg player: (int) 1 or 2
             :arg token : (str) any token of the player [1,2,3]
         '''
 
-        p = self.__player1      \
-            if int(player) == 1 \
-            else self.__player2
+        if self.__check_position_exists(new_pos):
+            if not self.__check_position_non_occupied(new_pos):
+
+                p = self.__player1      \
+                    if int(player) == 1 \
+                    else self.__player2
+
+                # Si la ficha está en el tablero su antigua posición se pone a False
+                if p.get_player_token(token) != None:
+                    self.__pos[p.get_player_token(token)] = False  
+
+                self.__pos[new_pos]  = True
+                
+                p.set_player_token(token, new_pos)
         
-        self.__pos[p[token]] = False
-        self.__pos[new_pos]  = True
-        
-        p[token] = new_pos
+        else: 
+            # ESTO DEBERÍA COMUNICARSE AL FRONT Y MOSTRARLO POR AHÍ, DE MOMENTO LO MUESTRO POR 
+            # PANTALLA, PODRÍA RETORNARSE 'TRUE' SI SE HA PODIDO MOVER PARA GESTIONAR EL MENSAJE
+            # DESDE FUERA
+            print("No es posible mover la ficha a esa posición, inténtelo de nuevo")
 
     def get_player_values(self,player):
         """
@@ -84,4 +98,10 @@ class Tablero():
             if int(player) == 1 \
             else self.__player2
 
-        return p.get_player_tokens 
+        return p.get_player_tokens()     
+
+
+# USE EXAMPLE
+t = Tablero()
+
+t.update_position(1, 2, "a4")

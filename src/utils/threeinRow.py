@@ -1,5 +1,5 @@
-from utils.tablero import Tablero
-from utils.player import Player
+from tablero import Tablero
+from player import Player
 
 
 """
@@ -23,7 +23,6 @@ class threeInRow:
         
         self.__win_possibilities = {"line": ["a", "b", "c", "1", "2", "3"],
                      "diagonal": {"d1": ["a1", "b2", "c3"], "d2":["a3", "b2", "c1"]}}
-
 
     def isWinner(self, player):
 
@@ -60,3 +59,5 @@ class threeInRow:
                     break
                 
         return winner
+
+    def player_move(self, player)

@@ -27,13 +27,6 @@ class Player():
 
         self.__symbol = symbol
 
-    def get_player_tokens(self):
-        """
-        Devuelve los valores de posición de los 3 tokens del Player
-        """
-
-        return self.__tokens.values()
-
     def set_player_token(self, token, pos): 
         """
         Asigna un valor de posición a uno de los tokens
@@ -45,9 +38,26 @@ class Player():
 
         self.__tokens[str(token)] = pos
 
+    def get_player_token(self,token): 
+        """
+        Devuelve el valor de posición de 1 token concreto
+
+        params: 
+            :arg token: (int) 1, 2 or 3
+        """
+
+        return self.__tokens[str(token)]
+
+    def get_player_tokens(self):
+        """
+        Devuelve los valores de posición de los 3 tokens del Player
+        """
+
+        return self.__tokens.values()
+
 
 """
-# EXAMPLE USE
+# USE EXAMPLE 
 
 p = Player("x")
 
