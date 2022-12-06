@@ -4,20 +4,23 @@ class Tablero():
     '''
     Tablero virtual para comprobar las posiciones. 
     Cada jugador dispone de 3 fichas numeradas. 
-
          1  2  3
          __ __ __
     a   |__|__|__|
     b   |__|__|__|
     c   |__|__|__|    
-
     :arg symbol_player_1: Indica el símbolo asignado del jugador 1
     :arg symbol_player_2: Indica el símbolo asignado del jugador 2
     '''
 
-    def __init__(self,symbol_player_1 = 'x', symbol_player_2='o') -> None:
+    def __init__(self,symbol_player_1 = 'x', symbol_player_2 = 'o') -> None:
         '''
         Inicialización de la clase. Inicio de jugadores 1 y 2 y simbolos asignados.
+        Instanciación del tablero con todas las casillas libres. 
+        
+        params:
+            :arg symbol_player_1: (str) for player1
+            :arg symbol_player_1: (str) for player2
         '''
         self.__player1 = Player(symbol_player_1)
         self.__player2 = Player(symbol_player_2)
@@ -32,7 +35,7 @@ class Tablero():
         '''
         Comprueba que la posición que se pasa existe en el tablero. Las posición validas serás la permutación de
         las letras [A-C] y los números [1-3]
-
+        
         params:
             :arg new_pos     : (str) any non-occupied/existing pos on table [a1,a2,a3,b1,b2,b3,c1,c2,c3]
         '''
@@ -44,7 +47,7 @@ class Tablero():
         Es decir, comprueba que no este ocupada ya por otra ficha. 
         
         Esta función esta planteada para que se llame después de la función check_position_exists()
-
+        
         params: 
             :arg new_pos     : (str) any non-occupied/existing pos on table [a1,a2,a3,b1,b2,b3,c1,c2,c3]
         '''
@@ -53,9 +56,8 @@ class Tablero():
     def update_position(self,player,token,new_pos):
         '''
         Actualiza la posición en la clase tablero y la del jugador que ha movido la ficha.
-
         Esta función esta planteada para que se llame después de las funciones check_position_exists() y check_position_non_occupied()
-
+        
         params: 
             :arg player: (int) 1 or 2
             :arg token : (str) any token of the player [1,2,3]
@@ -70,4 +72,16 @@ class Tablero():
         
         p[token] = new_pos
 
+    def get_player_values(self,player):
+        """
+        Retorna el objeto del jugador solicitado. 
+
+        params: 
+            :arg player: (int) 1 or 2
+        """
         
+        p = self.__player1      \
+            if int(player) == 1 \
+            else self.__player2
+
+        return p.get_player_tokens 
