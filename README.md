@@ -1,6 +1,4 @@
-# Proyecto práctica de servicios
-
--- Juego 3 en Raya --
+# Juego 3 en Raya 
 
 Implementadas clases: 
 
