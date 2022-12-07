@@ -54,11 +54,20 @@ class Player():
         """
 
         return self.__tokens.values()
+    
+    def get_player_symbol(self, token): 
+        """
+        Devuelve el símbolo indexado de una de las fichas
+
+        params: 
+            :arg token: (int) Token index
+        """
+
+        return self.__symbol + str(token)
 
 
-"""
 # USE EXAMPLE 
-
+"""
 p = Player("x")
 
 p.set_player_token(1, 'a1')
