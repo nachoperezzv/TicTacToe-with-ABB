@@ -17,7 +17,6 @@ eggs/
 lib/
 include/
 Scripts/
-!src/scripts/
 lib64/
 parts/
 sdist/
@@ -28,6 +27,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 *.cfg
+*.log
 MANIFEST
 
 # PyInstaller
