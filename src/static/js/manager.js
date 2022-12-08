@@ -2,9 +2,23 @@
 
 window.addEventListener('load', app);
 
-let gameBoard = ['', '', '', '', '', '', '', '', '']; 
-let turn = 0; // Keeps track if X or O player's turn
-let winner = false;
+var gameBoard = ['', '', '', '', '', '', '', '', '']; 
+var players;
+var turn = 0; // Keeps track if X or O player's turn
+var winner = false;
+
+// NUMBER OF PLAYERS
+function numberOfPlayers(num_players) {
+  var data = {numOfPlayers: num_players};
+  console.log('entro')
+  fetch('https://0.0.0.0:5000/gameMode', {
+        method: 'POST',
+        body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(commits => alert("La petición para establecer el número de jugadores ha fallado"))
+}
+
 
 // CREATE PLAYER
 const player = (name) => {

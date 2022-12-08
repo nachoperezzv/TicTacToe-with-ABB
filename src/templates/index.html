@@ -7,14 +7,14 @@
         
         <title>Tic Tac Toe</title>
         
-        <link rel="icon" type="plantilla-icon" href="assets/ABB-IRB-120-3-0-6-robot.ico" />
+        <link rel="icon" type="plantilla-icon" href="static/assets/ABB-IRB-120-3-0-6-robot.ico" />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="static/css/style.css">
 
     </head>
 
@@ -26,18 +26,17 @@
             >
             <nav class="navbar navbar-expand-sm navbar-light fixed-top">
                 <div class="container-fluid" id="navbar-header">      
-                    <a class="navbar-brand" href="./index.html">
-                        <img src="./assets/ABB-IRB-120-3-0-6-robot.png" alt="">
+                    <a class="navbar-brand" href="/">
+                        <img src="static/assets/ABB-IRB-120-3-0-6-robot.png" alt="">
                     </a>              
                     <button id="header-btn" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div id="navbarCollapse" class="collapse navbar-collapse">
                         <div class="navbar-nav">      
-                            <a class="nav-item nav-link active" href="./index.html">Home</a>
-                            <a class="nav-item nav-link" href="./config.html">Configuración</a>
-                            <!-- <a class="nav-item nav-link" href="config">Configuración</a> -->
-                            <a class="nav-item nav-link" href="./tutorial.html">Tutorial</a>
+                            <a class="nav-item nav-link active" href="/">Home</a>
+                            <a class="nav-item nav-link" href="/configuration">Configuración</a>
+                            <a class="nav-item nav-link" href="/tutorial">Tutorial</a>
                             <a class="nav-item nav-link" href="#footer">About</a>
                         </div>
                     </div>    
@@ -69,18 +68,20 @@
                         class="card"
                         >
                         <div class="card-body d-flex justify-content-center">
-                            <img src="./assets/person.png" alt="">
+                            <img src="static/assets/person.png" alt="">
                         </div>
                         <div class="card-header">
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button 
-                                    id="playmode-oneplayer-btn"
-                                    type="button"
+                                <a 
                                     class="btn border" 
-                                    style="font-weight: bold;"
-                                    > 
+                                    type="button" 
+                                    id="playmode-oneplayer-btn" 
+                                    onclick="numberOfPlayers(1)"
+                                    style="font-weight: bold;" 
+                                    href="/play"
+                                >
                                     Un jugador
-                                </button>
+                                </a>
                             </div>
                         </div>
                         
@@ -95,18 +96,20 @@
                         class="card"
                         >
                         <div class="card-body d-flex justify-content-center">
-                            <img src="./assets/people.png" alt="">
+                            <img src="static/assets/people.png" alt="">
                         </div>
                         <div class="card-header">
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button 
-                                    id="playmode-twoplayers-btn"
-                                    type="button"
+                                <a 
                                     class="btn border" 
-                                    style="font-weight: bold;"
-                                    > 
+                                    type="button" 
+                                    id="playmode-twoplayers-btn" 
+                                    onclick="numberOfPlayers(2)"
+                                    style="font-weight: bold;" 
+                                    href="/play"
+                                >
                                     Dos jugadores
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +136,7 @@
                         <!-- Links -->
                         <div class="container-fluid d-flex justify-content-center">
                             <a href="https://new.abb.com/es" target="_blank">
-                                <img src="assets/ABB_logo.png" class="img-fluid">
+                                <img src="static/assets/ABB_logo.png" class="img-fluid">
                             </a>
                         </div>                                
                     </div>
@@ -144,7 +147,7 @@
                         <!-- Links -->
                         <div class="container-fluid d-flex justify-content-center">
                             <a href="https://github.com/nachoperezzv/servicios.git" target="_blank">
-                                <img src="assets/github.png" class="img-fluid">
+                                <img src="static/assets/github.png" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -154,7 +157,7 @@
                         <!-- Links -->
                         <div class="container-fluid d-flex justify-content-center">
                             <a href="mailto:ignacioperezzv@gmail.com" target="_blank">
-                                <img src="assets/envelope.png" class="img-fluid">
+                                <img src="static/assets/envelope.png" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -169,15 +172,17 @@
                 >
                 <p> 
                     © 2022 Copyright <br> 
-                    <img src="./assets/ua-logo.png" alt=""> Universidad de Alicante
+                    <img src="static/assets/ua-logo.png" alt=""> Universidad de Alicante
                 </p>
             </div>
         </footer>
         <!-- Footer -->
         
         <!-- Scripts -->
-        <script src="/src/scripts/speech2text.js"></script>
-        <script src="/src/scripts/language.js"></script>
+        <script src="static/js/speech2text.js"></script>
+        <script src="static/js/language.js"></script>
+        <script src="static/js/manager.js"></script>
+        <script src="static/js/connection"></script>
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
