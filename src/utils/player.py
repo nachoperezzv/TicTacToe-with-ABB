@@ -51,7 +51,7 @@ class Player():
             :arg token: (int) 1, 2, 3...
         """
         return self.__tokens[str(token)]
-    
+
     def get_current_free_token(self):
         """
         Devuelve la siguiente ficha disponible para mover
