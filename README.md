@@ -12,7 +12,7 @@ Se ha optado por definir un tablero con 2 jugadores, teniendo cada uno 5 fichas,
 
 ## Por implementar ##
 
-  - minimax 
+  - mejoras en la inteligencia de la CPU, solo va a ganar, no defiende
   - retorno de posiciones final de todas las fichas tras game over
   
 ### A tener en cuenta ###
