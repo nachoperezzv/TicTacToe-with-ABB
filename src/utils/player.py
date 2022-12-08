@@ -4,9 +4,9 @@ class Player():
     sido colocada sobre el mismo todavía. El tablero es el siguiente:
          1  2  3
          __ __ __
-    a   |__|__|__|
-    b   |__|__|__|
-    c   |__|__|__|
+    A   |__|__|__|
+    B   |__|__|__|
+    C   |__|__|__|
     params:
         :arg symbol: Se escoge un caracter utf-8 para representar a cada jugador. Los carácteres típicos suelen ser X / O
     '''
@@ -51,6 +51,13 @@ class Player():
             :arg token: (int) 1, 2, 3...
         """
         return self.__tokens[str(token)]
+    
+    def get_current_free_token(self):
+        """
+        Devuelve la siguiente ficha disponible para mover
+        """
+
+        return self.__usedTokens
 
     def get_player_tokens(self):
         """

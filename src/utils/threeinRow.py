@@ -1,7 +1,10 @@
+from turtle import pos
 from tablero import Tablero
+from TCPcom.socketClienteExample import SocketClient
 import random 
 import time
 import platform
+import socket
 from os import system
 
 """
@@ -33,8 +36,8 @@ class ThreeInRow:
         
         self.__board = Tablero()
         
-        self.__win_possibilities = {"line": ["a", "b", "c", "1", "2", "3"],
-                     "diagonal": {"d1": ["a1", "b2", "c3"], "d2":["a3", "b2", "c1"]}}
+        self.__win_possibilities = {"line": ["A", "B", "C", "1", "2", "3"],
+                     "diagonal": {"d1": ["A1", "B2", "C3"], "d2":["A3", "B2", "C1"]}}
 
     def __evaluate(self):
         """
@@ -140,7 +143,27 @@ class ThreeInRow:
         Por defecto si mueve una ficha del usuario
 
         """
-        return self.__board.update_position(player,pos,isMove=True)
+
+        possible = self.__board.update_position(player,pos,isMove=True)
+        TCP_code = ""
+        if possible:
+            TCP_code = self.codify_tcp_message(player,pos)
+
+        return possible, TCP_code
+
+
+    def codify_tcp_message(self, player, pos):
+        tcp_message = ""
+        player_cod = "J" if player==1 else "Q"
+        
+        current_token = 0
+        current_token = self.__board.get_current_token(player)
+        
+        # Se codifica mensaje
+        tcp_message = tcp_message + player_cod + str(current_token) + ";" + pos
+        
+        return tcp_message
+
 
     def cpu_random_move(self, player = 2): 
         """
@@ -154,7 +177,9 @@ class ThreeInRow:
         while occupied: 
             pos, occupied = random.choice(list(self.__board.get_board().items()))
 
-        self.player_move(pos, player)
+        _, TCP_code = self.player_move(pos, player)
+
+        return TCP_code
 
     def cpu_move(self, player=2):
         """
@@ -169,14 +194,17 @@ class ThreeInRow:
             return False
 
         # Si está vacío se escoge una casilla aleatoria, sino se llama al minimax
+        TCP_code = ""
         if self.__board.empty_board():
-            self.cpu_random_move()
+            TCP_code = self.cpu_random_move()
         else: 
             depth = len(self.__board.empty_cells())
             pos,_ = self.__minimax(depth, isCpu=True)
             
             print("Movimiento  CPU: " + str(pos) + "\n")
-            self.player_move(pos, player)
+            _, TCP_code = self.player_move(pos, player)
+
+        return TCP_code
 
     def show_board(self): 
         """
@@ -188,20 +216,36 @@ class ThreeInRow:
     def get_board(self):
         return self.__board.get_board()
 
-# USE EXAMPLE
-"""
+# USE EXAMPLE ________________________________________
+
 game = ThreeInRow()
+""" Descomentar para probar conexion TCP"""
+TCPclient = SocketClient("127.0.0.1",4000)
 
 while not game.game_over():
 
+    # Espera movimiento de jugador
     moved = False
     while not moved:
-        move = str(input('Use [a1,..,c3]: '))
-        moved = game.player_move(move)
+        move = str(input('Use [A1,..,C3]: '))
+        moved, TCP_code_1 = game.player_move(move)
 
+    # Se codifica mensaje de jugador
+    print("TCP sent: " + TCP_code_1)
+    """ Descomentar si se quiere probar conexion TCP-IP """
+    TCPclient.mysend(TCP_code_1)
+
+    # Se muestra tablero y se ejecuta movimiento máquina
     game.show_board()
-    time.sleep(1)
-    game.cpu_move()
+    time.sleep(2)
+    TCP_code_2 = game.cpu_move()
+    
+    # Se codifica mensaje de máquina
+    print("TCP sent: " + TCP_code_2)
+    """ Descomentar si se quiere probar conexion TCP-IP """
+    TCPclient.mysend(TCP_code_2)
+
+    # Se muestra tablero
     game.show_board()
     
 if game.isWinner(1): 
@@ -210,7 +254,7 @@ elif game.isWinner(2):
     print("Perdise!!!\n")
 else:
     print("Empate!!!\n")
-"""
+
 
 """
 game.player_move("b2")

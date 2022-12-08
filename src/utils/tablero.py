@@ -6,9 +6,9 @@ class Tablero():
     Cada jugador dispone de 3 fichas numeradas. 
          1  2  3
          __ __ __
-    a   |__|__|__|
-    b   |__|__|__|
-    c   |__|__|__|    
+    A   |__|__|__|
+    B   |__|__|__|
+    C   |__|__|__|    
     :arg symbol_player_1: Indica el símbolo asignado del jugador 1
     :arg symbol_player_2: Indica el símbolo asignado del jugador 2
     '''
@@ -25,9 +25,9 @@ class Tablero():
         self.__player1 = Player(symbol_player_1)
         self.__player2 = Player(symbol_player_2)
         self.__pos = {
-            'a1':None, 'a2':None, 'a3':None,
-            'b1':None, 'b2':None, 'b3':None,
-            'c1':None, 'c2':None, 'c3':None
+            'A1':None, 'A2':None, 'A3':None,
+            'B1':None, 'B2':None, 'B3':None,
+            'C1':None, 'C2':None, 'C3':None
         }   
 
     def __check_position_exists(self,new_pos) -> bool:
@@ -36,7 +36,7 @@ class Tablero():
         las letras [A-C] y los números [1-3]
         
         params:
-            :arg new_pos     : (str) any non-occupied/existing pos on table [a1,a2,a3,b1,b2,b3,c1,c2,c3]
+            :arg new_pos     : (str) any non-occupied/existing pos on table [A1,A2,A3,B1,B2,B3,C1,C2,C3]
         '''
 
         return True if self.__pos.get(new_pos,False) != False else False
@@ -49,7 +49,7 @@ class Tablero():
         Esta función esta planteada para que se llame después de la función check_position_exists()
         
         params: 
-            :arg new_pos     : (str) any non-occupied/existing pos on table [a1,a2,a3,b1,b2,b3,c1,c2,c3]
+            :arg new_pos     : (str) any non-occupied/existing pos on table [A1,A2,A3,B1,B2,B3,C1,C2,C3]
         '''
 
         return self.__pos[new_pos]  
@@ -91,6 +91,17 @@ class Tablero():
 
         return possible
     
+    def get_current_token(self, player):
+        """
+        Devuelve la siguiente ficha disponible a mover
+        
+        """
+        p = self.__player1      \
+            if int(player) == 1 \
+            else self.__player2
+            
+        return p.get_current_free_token()
+
     def clear_position(self, pos): 
         """
         Elimina una ficha que se encuentre asignada a una posición 
