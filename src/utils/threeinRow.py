@@ -216,7 +216,7 @@ class ThreeInRow:
     def get_board(self):
         return self.__board.get_board()
 
-# USE EXAMPLE ________________________________________
+# ____________________________ USE EXAMPLE ________________________________________
 
 game = ThreeInRow()
 """ Descomentar para probar conexion TCP"""
