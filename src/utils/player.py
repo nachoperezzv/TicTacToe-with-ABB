@@ -22,55 +22,56 @@ class Player():
         self.__tokens = {
             '1':None,
             '2':None,
-            '3':None
+            '3':None, 
+            '4':None, 
+            '5':None
         } 
 
         self.__symbol = symbol
 
-    def set_player_token(self, token, pos): 
+        self.__usedTokens = 0
+
+    def set_player_token(self, pos): 
         """
-        Asigna un valor de posición a uno de los tokens
+        Asigna un valor de posición a uno de los tokens libres
 
         params: 
-            :arg token: (int) 1, 2 or 3
             :arg pos  : (str) board position
         """
 
-        self.__tokens[str(token)] = pos
+        self.__tokens[str(self.__usedTokens + 1)] = pos
+        self.__usedTokens += 1
 
+    
     def get_player_token(self,token): 
         """
         Devuelve el valor de posición de 1 token concreto
 
         params: 
-            :arg token: (int) 1, 2 or 3
+            :arg token: (int) 1, 2, 3...
         """
-
         return self.__tokens[str(token)]
 
     def get_player_tokens(self):
         """
-        Devuelve los valores de posición de los 3 tokens del Player
+        Devuelve los valores de posición de los tokens del Player
         """
 
         return self.__tokens.values()
     
-    def get_player_symbol(self, token): 
+    def get_player_symbol(self): 
         """
-        Devuelve el símbolo indexado de una de las fichas
-
-        params: 
-            :arg token: (int) Token index
+        Devuelve el símbolo que representa al jugador
         """
 
-        return self.__symbol + str(token)
+        return self.__symbol
 
 
 # USE EXAMPLE 
 """
 p = Player("x")
 
-p.set_player_token(1, 'a1')
+p.set_player_token('a1')
 
 print(p.get_player_tokens())
 """
