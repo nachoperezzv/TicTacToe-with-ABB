@@ -189,7 +189,7 @@ class ThreeInRow:
         return self.__board.get_board()
 
 # USE EXAMPLE
-
+"""
 game = ThreeInRow()
 
 while not game.game_over():
@@ -210,7 +210,7 @@ elif game.isWinner(2):
     print("Perdise!!!\n")
 else:
     print("Empate!!!\n")
-
+"""
 
 """
 game.player_move("b2")
