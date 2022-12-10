@@ -1,9 +1,6 @@
-#!/usr/bin/env python
-
 import socket
 
-class SocketClient:
-
+class TCP:
     """
     Destinada a la gestión simplificada de la comunicación desde la parte 
     cliente del Back-End

@@ -1,10 +1,11 @@
 from turtle import pos
 from tablero import Tablero
-from TCPcom.socketClienteExample import SocketClient
+from tcp import TCP
+
 import random 
 import time
 import platform
-import socket
+
 from os import system
 
 """
@@ -90,7 +91,6 @@ class ThreeInRow:
         return best
 
     def isWinner(self, player):
-
         """
         Comprueba si el jugador es ganador. 
         Se revisa si los tokens de este se encuentran en una de las dos diagonales. 
@@ -130,7 +130,6 @@ class ThreeInRow:
 
         Devuelve quién ha ganado, en caso de que siga en juego 'False'.
         """
-
         return self.isWinner(1) or self.isWinner(2)
 
     def player_move(self, pos, player=1) -> bool: 
@@ -220,7 +219,7 @@ class ThreeInRow:
 
 game = ThreeInRow()
 """ Descomentar para probar conexion TCP"""
-TCPclient = SocketClient("127.0.0.1",4000)
+TCPclient = TCP("127.0.0.1",4000)
 
 while not game.game_over():
 
