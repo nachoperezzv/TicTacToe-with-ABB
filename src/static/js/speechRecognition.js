@@ -1,10 +1,14 @@
+// import {language} from "./language"
+// import {dialect} from "./language"
+
 if ("webkitSpeechRecognition" in window) {
   let speechRecognition = new webkitSpeechRecognition();
   let final_transcript = "";
 
   speechRecognition.continuous = true;
   speechRecognition.interimResults = true;
-  speechRecognition.lang = document.querySelector("#select_dialect").value;
+  speechRecognition.lang = 'es-ES'
+  // speechRecognition.lang = document.querySelector("#select_dialect").value;
 
   speechRecognition.onstart = () => {
     document.querySelector("#status").style.display = "block";
@@ -32,10 +36,23 @@ if ("webkitSpeechRecognition" in window) {
     document.querySelector("#interim").innerHTML = interim_transcript;
   };
 
-  document.querySelector("#start").onclick = () => {
+  document.querySelector("#btn__mic__start").onclick = () => {
+    document.querySelector("#btn__mic__start").style.display = 'none'
+    document.querySelector("#btn__mic__stop").style.display = 'block'
+
+    document.querySelector("#final").innerHTML = "";
+    final_transcript = "";
+
+    document.querySelector("#interim").innerHTML = "";
+    interim_transcript = "";
+
     speechRecognition.start();
   };
-  document.querySelector("#stop").onclick = () => {
+
+  document.querySelector("#btn__mic__stop").onclick = () => {
+    document.querySelector("#btn__mic__start").style.display = 'block'
+    document.querySelector("#btn__mic__stop").style.display = 'none'
+
     speechRecognition.stop();
   };
 } else {

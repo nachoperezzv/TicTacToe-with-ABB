@@ -1,4 +1,4 @@
-var langs =[
+const langs =[
  ['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
  ['Bahasa Melayu',   ['ms-MY']],
@@ -63,8 +63,8 @@ var langs =[
  ['Lingua latīna',   ['la']]
 ];
 
-let select_language = document.querySelector('#select_language');
-let select_dialect = document.querySelector('#select_dialect');
+var select_language = document.querySelector('#select_language');
+var select_dialect = document.querySelector('#select_dialect');
 
 for (var i = 0; i < langs.length; i++) {
   select_language.options[i] = new Option(langs[i][0], i);
@@ -73,6 +73,9 @@ for (var i = 0; i < langs.length; i++) {
 select_language.selectedIndex = 7;
 updateCountry();
 select_dialect.selectedIndex = 7;
+
+// export var language = langs[select_language.selectedIndex]
+// export var dialect = langs[select_language.selectedIndex][select_dialect.selectedIndex]
 
 function updateCountry() {
   for (var i = select_dialect.options.length - 1; i >= 0; i--) {

@@ -9,7 +9,7 @@ var winner = false;
 
 // NUMBER OF PLAYERS
 function numberOfPlayers(num_players) {
-  var data = {numOfPlayers: num_players};
+  let data = {'numOfPlayers': num_players};
   console.log('entro')
   fetch('https://0.0.0.0:5000/gameMode', {
         method: 'POST',
@@ -24,10 +24,10 @@ function numberOfPlayers(num_players) {
 const player = (name) => {
   name = name;
   return {name};
- };
+};
 
- let playerX = player("");
- let playerY = player("");
+let playerX = player("");
+let playerY = player("");
 
  // INITIALIZE APP
 function app() {
@@ -45,12 +45,13 @@ function addPlayers(event) {
   event.preventDefault();
 
   if (this.player1.value === '' || this.player2.value === '') {
-    alert('You Must Enter a Name for Each Field');
+    alert('Porfavor rellena todos los campos');
     return;
   }
 
   const playerFormContainer = document.querySelector('.enter-players');
   const boardMain = document.querySelector('.board__main');
+  
   playerFormContainer.classList.add('hide-container');
   boardMain.classList.remove('hide-container');
 
@@ -93,7 +94,7 @@ function makeMove(event) {
   let cellToAddToken = document.querySelector(`[data-id='${currentCell}']`);
   
   if (cellToAddToken.innerHTML !== '') {
-    console.log('This cell is already taken.');
+    console.log('Esta celda esta ocupada');
     return;
   } else {
     if (currentPlayer() === 'X') {
@@ -117,7 +118,7 @@ function makeMove(event) {
 
 function checkIfTie() {
   if (turn > 7) {
-    alert('game over a tie')
+    alert('Ya has llenado todas las casillas. Es un empate!!')
   }
 }
 
@@ -160,16 +161,16 @@ function isWinner() {
       let currentPlayerText = document.querySelector('.board___player-turn');
       if (currentPlayer() === 'X') {
         currentPlayerText.innerHTML = `
-          <div class="congratulations">Congratulations ${playerX.name}</div>
-          <div class="u-r-winner">You are our winner!</div>
+          <div class="congratulations">Felicidades ${playerX.name}</div>
+          <div class="u-r-winner">Eres el ganador!</div>
         `;
         winner = true;
         removeCellClickListener();
         return true;
       } else {
         currentPlayerText.innerHTML = `
-          <div class="congratulations">Congratulations ${playerY.name}</div>
-          <div class="u-r-winner">You are our winner!</div>
+          <div class="congratulations">Felicidades ${playerY.name}</div>
+          <div class="u-r-winner">Eres el ganador!</div>
         `;
         winner = true;
         removeCellClickListener();
@@ -190,12 +191,12 @@ function changeBoardHeaderNames() {
     let currentPlayerText = document.querySelector('.board___player-turn');
     if (currentPlayer() === 'X') {
       currentPlayerText.innerHTML = `
-        <span class="name--style">${playerX.name}</span>, you are up!
+        <span class="name--style">${playerX.name}</span>, te toca.
         <div class="u-r-winner"></div>
       `
     }  else {
       currentPlayerText.innerHTML = `
-        <span class="name--style">${playerY.name}</span>, you are up.
+        <span class="name--style">${playerY.name}</span>, te toca.
         <div class="u-r-winner"></div>
       `
     }
@@ -218,7 +219,7 @@ function resetBoard() {
 
   let currentPlayerText = document.querySelector('.board___player-turn');
   currentPlayerText.innerHTML = `
-    <span class="name--style">${playerX.name}</span>, you are up!
+    <span class="name--style">${playerX.name}</span>, empiezas tu!
     <div class="u-r-winner"></div>
   `
 

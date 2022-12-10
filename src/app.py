@@ -24,6 +24,8 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
+def get_from_request(name):
+    return request.form.to_dict().get(name, None)
 
 @app.route('/', methods=['GET'])
 def main():
@@ -37,16 +39,28 @@ def one_player():
 def configuration():
     return render_template('config.html'), 200
 
+@app.route('/configuration/setABBconfig', methods=['POST'])
+def setABBconfig():
+    '''
+    Se recoge la IP y el PUERTO. En la clase de comunicación se debe asignar la nueva IP y el nuevo puerto
+    '''
+    try:
+        print(get_from_request('ip'), get_from_request('port'))
+    except ValidationError as e:
+        logging.error(str(e), traceback.format_exc())
+
 @app.route('/play')
 def play():
     return render_template('play.html'), 200
 
-@app.route('/gameMode', methods=(['POST']))
-def setGameMode():
+@app.route('/gameMode', methods=['POST'])
+def gameMode():
     try:
-        print(request.form.to_dict().get('numOfPlayers'))
+        print(get_from_request('numOfPlayers'))
+        return 'ok'
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
+
 
 
 if __name__ == '__main__':

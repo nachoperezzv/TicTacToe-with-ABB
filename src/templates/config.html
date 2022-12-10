@@ -24,7 +24,7 @@
             id="header"
             class="container-fluid pb-1"
             >
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+            <nav class="navbar navbar-expand-sm navbar-light">
                 <div class="container-fluid" id="navbar-header">      
                     <a class="navbar-brand" href="/">
                         <img src="static/assets/ABB-IRB-120-3-0-6-robot.png" alt="">
@@ -44,7 +44,7 @@
             </nav>
             <h1
                 id="header-title"
-                class="d-flex justify-content-center pt-5"
+                class="d-flex justify-content-center"
                 style="font-size: 400%; font-family: consolas; font-weight: bold; text-align: center;"
                 >            
                 Tic Tac Toe
@@ -56,7 +56,7 @@
         <!-- Language Selector -->
         <div 
             id="div_language" 
-            class="container-fluid px-5 py-2" 
+            class="container-fluid px-5 py-3" 
             >
             <h2 class="mb-3">Idioma</h2>
             <select 
@@ -74,12 +74,14 @@
         <!-- Conexión -->
         <div
             id="div_conexion" 
-            class="container-fluid px-5 py-2"
+            class="container-fluid px-5 py-3"
             >
             <h2 class="mb-3">Conexión</h2>
             <select 
                 id="select_ip" 
-                class="form-select text-secondary my-2">
+                class="form-select text-secondary my-2"
+                onchange="updateABBconfig()"
+            >
             </select>
             <select 
                 id="select_port"
@@ -91,8 +93,8 @@
         <!-- Footer -->
         <footer 
             id="footer"
-            class="text-center text-lg-start text-muted fixed-bottom"
-            style="background-color: rgba(0, 0 , 0, 0.05);">
+            class="page-footer text-center text-lg-start text-muted"
+        >
             <!-- Links -->
             <div 
                 id="footer-links"
@@ -149,10 +151,10 @@
         <!-- Footer -->
 
         <!-- Scripts -->
-        <script src="static/js/speech2text.js"></script>
+        <script src="static/js/speechRecognition.js"></script>
         <script src="static/js/language.js"></script>
         <script src="static/js/manager.js"></script>
-        <script src="static/js/connection"></script>
+        <script src="static/js/connection.js"></script>
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
