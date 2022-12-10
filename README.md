@@ -1,42 +1,20 @@
-# Proyecto práctica de servicios
+# Juego 3 en Raya 
 
-En este fichero se van a explicar pasos de instalación de dependencias y ejecución. Asi como distribución de carpetas.
+Implementadas clases: 
 
-## Referencias
+  - Player -> Jugador con 5 fichas. Con ella se gestiona la posición de cada una de las fichas en el tablero.
+  
+  - Tablero -> Crea inicialmente un tablero vacío con 2 jugadores. Tiene métodos de comprobación de posiciones existentes, ocupadas, actualización de posiciones, devolución de información de los jugadores, del propio tablero...
+  
+  - ThreeinRow -> Implementa el propio juego del 3 en raya. Gestiona la lógica de movimientos en el tablero, la inteligencia de la CPU, si la partida ha terminado...
+  
+Se ha optado por definir un tablero con 2 jugadores, teniendo cada uno 5 fichas, de manera que cada vez que se coloque una no se pueda mover. Para que la inteligencia de la CPU sea aplicable con un 'minimax' y no se complique la elección de qué ficha mover y posibles casos de jugadas infinitas. 
 
-######################################
-JavaScript + CSS (Bootstrap) + HTML ##
-######################################
+## Por implementar ##
 
-https://w3schools.com
-https://mdbootstrap.com/docs/standard
-https://getbootstrap.esdocu.com/docs/5.1
-https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  - mejoras en la inteligencia de la CPU, solo va a ganar, no defiende
+  - retorno de posiciones final de todas las fichas tras game over
+  
+### A tener en cuenta ###
 
-Para el footer: https://www.youtube.com/watch?v=PSD5pFi6bx4 
-
-
-#################
-Python (Flask) ##
-#################
-
-https://flask.palletsprojects.com/en/2.2.x/
-
-
-###############
-Repositorios ##
-###############
-
-https://github.com/zolomohan/speech-recognition-in-javascript
-https://github.com/coredumbs/domotic-system-with-Pygame-and-Arduino
-https://github.com/pricheal/python-client-server
-https://github.com/robhitt/tic-tac-toe-js
-
-
-
-
-
-
-
-
-
+Sería bueno devolver la posición de todas las fichas del tablero al terminar la partida para así recogerlas y devolverlas a su posición respectiva inicial. 
