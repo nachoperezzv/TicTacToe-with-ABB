@@ -19,8 +19,7 @@ class Tablero():
         '''
         Inicialización de la clase. Inicio de jugadores 1 y 2 y simbolos asignados.
         '''
-        self.__numOfPlayers = ''
-        self.__gameMode = ''
+        self.__gameMode = None
         self.__player1 = Player(symbol_player_1)
         self.__player2 = Player(symbol_player_2)
         self.__pos = {
@@ -72,13 +71,9 @@ class Tablero():
         
         p[token] = new_pos
     
-    def gameMode(self, numOfPlayers):
-        self.__numOfPlayers = numOfPlayers
+    def setGameMode(self, mode):
+        self.__gameMode = mode
 
-        if self.__numOfPlayers == '1':
-            self.__gameMode = 1
-        else: 
-            self.__gameMode = 2
-
-
+    def getGameMode(self):
+        return self.__gameMode
         

@@ -1,11 +1,16 @@
 from utils import Tablero
 from utils import Player
+
+from utils import (
+    get_from_request,
+    set_response
+)
+
 from custom import ValidationError
 from logger import getFullPatch
 
 from flask import Flask
-from flask import jsonify, render_template
-from flask import request
+from flask import render_template
 
 import sys, os, traceback, logging
 
@@ -22,10 +27,10 @@ logging.basicConfig(
 app = Flask("TicTacToe")
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
+tablero = Tablero()
+
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
-def get_from_request(name):
-    return request.form.to_dict().get(name, None)
 
 @app.route('/', methods=['GET'])
 def main():
@@ -46,22 +51,25 @@ def setABBconfig():
     '''
     try:
         print(get_from_request('ip'), get_from_request('port'))
+        return set_response('ok')
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
+        return set_response(str(e))
 
-@app.route('/play')
+@app.route('/play', methods=['GET'])
 def play():
-    return render_template('play.html'), 200
-
-@app.route('/gameMode', methods=['POST'])
-def gameMode():
     try:
-        print(get_from_request('numOfPlayers'))
-        return 'ok'
+        return render_template('play.html'), 200
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
 
-
+@app.route('/play/GameMode', methods=['POST'])
+def setGameMode():
+    try:
+        tablero.setGameMode(get_from_request('GameMode'))
+        return set_response('ok', 200)
+    except ValidationError as e:
+        logging.error(str(e), traceback.format_exc())
 
 if __name__ == '__main__':
     app.debug = True

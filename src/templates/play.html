@@ -56,16 +56,20 @@
         <!-- Player Form -->
         <div class="enter-players">
             <form id="player-form">
-                <div class="player-container">
-                    <label for="player1"></label>
-                    <input type="text" placeholder="nombre jugador 1" name="player1" id="player1" class="input-field" />
+                <div
+                    id="player__container__1" 
+                    class="player-container"
+                >
+                    <input id="input__player1" name="player1" type="text" placeholder="nombre jugador 1" class="input-field"/>
                 </div>
-                <div class="player-container">
-                    <label for="player2"></label>
-                    <input type="text" placeholder="nombre jugador 2" name="player2" id="player2" class="input-field" />
+                <div
+                    id="player__container__2" 
+                    class="player-container"
+                >
+                    <input id="input__player2" name="player2" type="text" placeholder="nombre jugador 2" class="input-field"/>
                 </div>
         
-                <input type="submit" class="submit-btn" value="Comenzar" />
+                <input id="submit-btn" type="submit" class="submit-btn" value="Comenzar" />
             </form>
         </div>
         <!-- Player Form -->
@@ -76,11 +80,14 @@
             class="board__main hide-container"
             >
             <!-- Player Turn Container for Text -->
-            <div class="board___player-turn"></div>  
+            <div 
+                class="board___player-turn">
+            </div>  
             <!-- Player Turn Container for Text -->
 
             <!-- Board -->
-            <div class="board__container">
+            <div 
+                class="board__container">
                 <div class="board__cell">
                     <div class="letter" data-id="0"></div>
                 </div>
@@ -124,7 +131,7 @@
                 >
                     <div 
                         id="mic__container"
-                        class="col-md-2"
+                        class="col-md-2 d-sm-flex justify-content-center"
                     >
                         <button
                             id="btn__mic__start"
@@ -152,45 +159,20 @@
                 
                     <div 
                         id="transcribe__container"
-                        class="col-md-4"
+                        class="col-md-6 d-none d-lg-block"
                     >
                         <span id="final" class="text"></span>
                         <span id="interim" class="text"></span>
                     </div>
                 </div>
             </div>
-            <!-- Mic -->
-            <!-- <div
-                id="mic-button" 
-                class="container-fluid d-flex justify-content-center my-2"
-                >
-                <button 
-                    id="btn__start"
-                    type="button" 
-                    class="btn btn-default btn-floating" 
-                >
-                    
-                </button>   
-                
-                <button 
-                    id="btn__stop"
-                    type="button" 
-                    class="btn btn-default btn-floating" 
-                >
-                    
-                </button>  
-                
-                <div 
-                    class="">
-                </div>
-            </div> -->
-            <!-- Mic -->
 
             <!-- Reset -->
-            <div class="reset reset--hidden pb-3">
+            <div 
+                class="reset reset--hidden pb-3">
                 <div class="reset__text"></div>
                 <button class="replay-btn" value="replay">
-                    <span class="clear-board">Limpiar pantalla</span>
+                    <span class="clear-board" style="font-weight: bold;">Limpiar pantalla</span>
                 </button>
             </div>
             <!-- Reset  -->

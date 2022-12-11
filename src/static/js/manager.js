@@ -3,21 +3,9 @@
 window.addEventListener('load', app);
 
 var gameBoard = ['', '', '', '', '', '', '', '', '']; 
-var players;
+var mode = '1';
 var turn = 0; // Keeps track if X or O player's turn
 var winner = false;
-
-// NUMBER OF PLAYERS
-function numberOfPlayers(num_players) {
-  let data = {'numOfPlayers': num_players};
-  console.log('entro')
-  fetch('https://0.0.0.0:5000/gameMode', {
-        method: 'POST',
-        body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(commits => alert("La petición para establecer el número de jugadores ha fallado"))
-}
 
 
 // CREATE PLAYER
@@ -26,8 +14,50 @@ const player = (name) => {
   return {name};
 };
 
-let playerX = player("");
-let playerY = player("");
+var playerX = player("");
+var playerY = player("");
+
+// NUMBER OF PLAYERS
+document.querySelector('#playmode-oneplayer-btn').onclick = () => {
+  mode = '1';
+  let data = {GameMode: mode};
+
+  fetch('http://localhost:5000/play/GameMode', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+document.querySelector('#playmode-twoplayers-btn').onclick = () => {
+  mode = '2';
+  let data = {GameMode: mode};
+
+  fetch('http://localhost:5000/play/GameMode', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
 
  // INITIALIZE APP
 function app() {
@@ -56,7 +86,12 @@ function addPlayers(event) {
   boardMain.classList.remove('hide-container');
 
   playerX.name = this.player1.value;
-  playerY.name = this.player2.value;
+  if(mode == '1'){
+    playerY.name = 'CPU';
+  } else{
+    playerY.name = this.player2.value;
+  }
+
   buildBoard();
 }
 
