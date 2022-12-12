@@ -53,7 +53,7 @@ class ThreeInRow:
         else:
             return 0 
 
-    def minimax(self, depth, isCpu): 
+    def __minimax(self, depth, isCpu): 
         """
         Heurística para llegar al movimiento óptimo
         """
@@ -74,7 +74,7 @@ class ThreeInRow:
 
         for cell in self.__board.empty_cells():
             self.__board.update_position(player, cell, isMove=False)
-            score = self.minimax(depth-1, not isCpu)
+            score = self.__minimax(depth-1, not isCpu)
             self.__board.clear_position(cell)
             score[0] = cell
 
@@ -142,7 +142,7 @@ class ThreeInRow:
         """
         return self.__board.update_position(player,pos,isMove=True)
 
-    def cpu_random_move(self, player = 2): 
+    def cpu_random_move(self, player=2): 
         """
         Se mueve una ficha aleatoria a una posición aletoria que esté libre
         
@@ -174,7 +174,7 @@ class ThreeInRow:
             pos = self.cpu_random_move()
         else: 
             depth = len(self.__board.empty_cells())
-            pos,_ = self.minimax(depth, isCpu=True)
+            pos,_ = self.__minimax(depth, isCpu=True)
             
             #print("Movimiento  CPU: " + str(pos) + "\n")
             self.player_move(pos, player)
