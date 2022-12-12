@@ -1,4 +1,5 @@
 from tablero import Tablero
+from math import inf 
 import random 
 import time
 import platform
@@ -52,7 +53,7 @@ class ThreeInRow:
         else:
             return 0 
 
-    def __minimax(self, depth, isCpu): 
+    def minimax(self, depth, isCpu): 
         """
         Heurística para llegar al movimiento óptimo
         """
@@ -60,11 +61,11 @@ class ThreeInRow:
         # Si se quiere maximizar el movimiento, se tiene que poner 
         # un valor ínfimo (caso para la máquina)
         if isCpu:
-            best = [None, -1000] 
+            best = [None, -inf] 
             player = 2
         # Para las suposiciones del usuario es lo contrario
         else: 
-            best = [None, 1000]
+            best = [None, +inf]
             player = 1 
 
         if depth == 0 or self.game_over():
@@ -73,7 +74,7 @@ class ThreeInRow:
 
         for cell in self.__board.empty_cells():
             self.__board.update_position(player, cell, isMove=False)
-            score = self.__minimax(depth-1, not isCpu)
+            score = self.minimax(depth-1, not isCpu)
             self.__board.clear_position(cell)
             score[0] = cell
 
@@ -99,7 +100,7 @@ class ThreeInRow:
 
         winner = False
 
-        values = self.__board.get_player_values(player)    
+        values = self.__board.get_player_values(player)   
 
         # Comprobación de diagonales para los tokens del jugador
         if  ("a1" in values and "b2" in values and "c3" in values) or \
@@ -127,8 +128,7 @@ class ThreeInRow:
 
         Devuelve quién ha ganado, en caso de que siga en juego 'False'.
         """
-
-        return self.isWinner(1) or self.isWinner(2)
+        return True if self.isWinner(1) or self.isWinner(2) else False
 
     def player_move(self, pos, player=1) -> bool: 
         """
@@ -156,6 +156,8 @@ class ThreeInRow:
 
         self.player_move(pos, player)
 
+        return pos
+
     def cpu_move(self, player=2):
         """
         Se mueve una ficha de la cpu con 'inteligencia' a una posición si la partida 
@@ -165,18 +167,19 @@ class ThreeInRow:
 
         # Hay un ganador o el tablero está lleno
         if self.game_over() or self.__board.full_board():
-            print("Win: {} o full: {}".format(self.game_over(), self.__board.full_board()))
             return False
 
         # Si está vacío se escoge una casilla aleatoria, sino se llama al minimax
         if self.__board.empty_board():
-            self.cpu_random_move()
+            pos = self.cpu_random_move()
         else: 
             depth = len(self.__board.empty_cells())
-            pos,_ = self.__minimax(depth, isCpu=True)
+            pos,_ = self.minimax(depth, isCpu=True)
             
-            print("Movimiento  CPU: " + str(pos) + "\n")
+            #print("Movimiento  CPU: " + str(pos) + "\n")
             self.player_move(pos, player)
+
+        return pos
 
     def show_board(self): 
         """
@@ -192,6 +195,7 @@ class ThreeInRow:
 """
 game = ThreeInRow()
 
+
 while not game.game_over():
 
     moved = False
@@ -201,7 +205,8 @@ while not game.game_over():
 
     game.show_board()
     time.sleep(1)
-    game.cpu_move()
+    pos = game.cpu_move()
+    print("Movimiento  CPU: " + str(pos) + "\n")
     game.show_board()
     
 if game.isWinner(1): 
@@ -209,7 +214,8 @@ if game.isWinner(1):
 elif game.isWinner(2): 
     print("Perdise!!!\n")
 else:
-    print("Empate!!!\n")
+    print("Empate!!!\n") 
+
 """
 
 """

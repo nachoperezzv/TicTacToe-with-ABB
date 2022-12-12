@@ -94,14 +94,16 @@ class Tablero():
     def clear_position(self, pos): 
         """
         Elimina una ficha que se encuentre asignada a una posición 
+
+        Si la ficha está en el tablero su antigua posición y la posición de dicha ficha 
+        se ponen a None
         """
-        # Si la ficha está en el tablero su antigua posición se pone a False
         self.__pos[pos] = None
 
     
-    def get_player_values(self,player):
+    def get_player_real_values(self,player):
         """
-        Retorna el objeto del jugador solicitado. 
+        Retorna el objeto rel del jugador solicitado. 
 
         params: 
             :arg player: (int) 1 or 2
@@ -112,6 +114,26 @@ class Tablero():
             else self.__player2
 
         return p.get_player_tokens()   
+    
+    def get_player_values(self,player):
+        """
+        Retorna las posiciones en las que se encontrarían los jugadores
+
+        params: 
+            :arg player: (int) 1 or 2
+        """
+        p = self.__player1      \
+            if int(player) == 1 \
+            else self.__player2
+        
+        symb = p.get_player_symbol()
+
+        values = []
+        for k in self.__pos.keys():
+            if self.__pos[k] == symb:
+                values.append(k)
+
+        return values
 
     def get_board(self): 
         """ 
