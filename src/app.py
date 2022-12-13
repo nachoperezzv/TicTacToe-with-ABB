@@ -1,5 +1,7 @@
 from utils import Tablero
 from utils import Player
+from utils import ThreeInRow
+from utils import TCP
 
 from utils import (
     get_from_request,
@@ -10,9 +12,9 @@ from custom import ValidationError
 from logger import getFullPatch
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, request
 
-import sys, os, traceback, logging
+import sys, os, traceback, logging, re
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 logging.basicConfig(
@@ -27,7 +29,8 @@ logging.basicConfig(
 app = Flask("TicTacToe")
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
-# tablero = Tablero()
+threeInRow = ThreeInRow()
+tcp = TCP()
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
@@ -50,14 +53,23 @@ def setABBconfig():
     Se recoge la IP y el PUERTO. En la clase de comunicación se debe asignar la nueva IP y el nuevo puerto
     '''
     try:
-        print(get_from_request('ip'), get_from_request('port'))
+        ip, port = get_from_request('ip'), get_from_request('port')
+        
+        tcp.set_host(ip)
+        tcp.set_port(port)
+
         return set_response('ok')
+        
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
         return set_response(str(e))
 
 @app.route('/play', methods=['GET'])
 def play():
+    '''
+    Renderización de la pantalla de juego. 
+    Inicialmente se renderiza el form para rellenar jugadores y después el tablero
+    '''
     try:
         return render_template('play.html'), 200
     except ValidationError as e:
@@ -65,11 +77,49 @@ def play():
 
 @app.route('/play/GameMode', methods=['POST'])
 def setGameMode():
+    '''
+    Configuración del modo de juego en función del butón pulsado en la interfaz
+    '''
     try:
-        # tablero.setGameMode(get_from_request('GameMode'))
+        threeInRow.set_game_mode(get_from_request('GameMode'))
         return set_response('ok', 200)
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
+
+
+@app.route('/play/move', methods=['POST'])
+def move():
+    '''
+    Recibe modomovimiento realizado en la in
+    '''
+    try: 
+        mode = threeInRow.get_game_mode()
+        player, pos =  get_from_request('player'), get_from_request('position') 
+
+        if mode == '1':
+            valid , msg = threeInRow.player_move(pos)            
+            if valid: tcp.mysend(msg)
+            else: logging.error('Posición seleccionada no válida')
+
+            msg = threeInRow.cpu_move()
+            response = re.split(r';', msg)
+            tcp.mysend(msg)
+            
+            return set_response(response)
+            
+        elif mode == '2':
+            valid , msg = threeInRow.player_move(pos, player)            
+            if valid: tcp.mysend(msg)
+            else: logging.error('Posición seleccionada no válida')
+
+            return set_response('ok')
+
+        else: 
+            logging.error('Modo de juego no válido')
+        
+    except ValidationError as e:
+        logging.error(str(e), traceback.format_exc())
+
 
 if __name__ == '__main__':
     app.debug = True
