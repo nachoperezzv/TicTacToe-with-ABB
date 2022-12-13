@@ -11,22 +11,12 @@ from os import system
 COMBINAR EN ESTA CLASE SOLO LA LÓGICA DEL 3 EN RAYA
 """
 
-def clear_window(): 
-    """
-    Clears the console
-    """
-    os_name = platform.system().lower()
-    if 'windows' in os_name:
-        system('cls')
-    else:
-        system('clear')
 
 class ThreeInRow: 
     """
     Lógica de juego para el 3 en línea
     
     """
-
     def __init__(self) -> None:
         
         """
@@ -34,8 +24,7 @@ class ThreeInRow:
             Definición de las posibilidades de victoria (línea en filas o columnas y en diagonales)
         """
         
-        self.__board = Tablero()
-        
+        self.__board = Tablero()        
         self.__win_possibilities = {"line": ["A", "B", "C", "1", "2", "3"],
                      "diagonal": {"d1": ["A1", "B2", "C3"], "d2":["A3", "B2", "C1"]}}
 
@@ -88,6 +77,12 @@ class ThreeInRow:
                     best = score        # Mínimo valor para el usuario
         
         return best
+
+    def set_game_mode(self, mode):
+        self.__mode = mode
+    
+    def get_game_mode(self):
+        return self.__mode
 
     def isWinner(self, player):
         """
@@ -213,6 +208,18 @@ class ThreeInRow:
 
     def get_board(self):
         return self.__board.get_board()
+
+
+def clear_window(): 
+    """
+    Clears the console
+    """
+    os_name = platform.system().lower()
+    if 'windows' in os_name:
+        system('cls')
+    else:
+        system('clear')
+
 
 # ____________________________ USE EXAMPLE ________________________________________
 
