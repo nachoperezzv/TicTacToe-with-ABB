@@ -27,7 +27,7 @@ logging.basicConfig(
 app = Flask("TicTacToe")
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
-tablero = Tablero()
+# tablero = Tablero()
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
@@ -66,7 +66,7 @@ def play():
 @app.route('/play/GameMode', methods=['POST'])
 def setGameMode():
     try:
-        tablero.setGameMode(get_from_request('GameMode'))
+        # tablero.setGameMode(get_from_request('GameMode'))
         return set_response('ok', 200)
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())

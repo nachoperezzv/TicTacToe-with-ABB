@@ -1,5 +1,5 @@
-from tablero import Tablero
-from tcp import TCP
+from utils.tablero import Tablero
+from utils.tcp import TCP
 
 import random 
 import time
@@ -216,42 +216,42 @@ class ThreeInRow:
 
 # ____________________________ USE EXAMPLE ________________________________________
 
-game = ThreeInRow()
-""" Descomentar para probar conexion TCP"""
-TCPclient = TCP("127.0.0.1",4000)
+# game = ThreeInRow()
+# """ Descomentar para probar conexion TCP"""
+# TCPclient = TCP("127.0.0.1",4000)
 
-while not game.game_over():
+# while not game.game_over():
 
-    # Espera movimiento de jugador
-    moved = False
-    while not moved:
-        move = str(input('Use [A1,..,C3]: '))
-        moved, TCP_code_1 = game.player_move(move)
+#     # Espera movimiento de jugador
+#     moved = False
+#     while not moved:
+#         move = str(input('Use [A1,..,C3]: '))
+#         moved, TCP_code_1 = game.player_move(move)
 
-    # Se codifica mensaje de jugador
-    print("TCP sent: " + TCP_code_1)
-    """ Descomentar si se quiere probar conexion TCP-IP """
-    TCPclient.mysend(TCP_code_1)
+#     # Se codifica mensaje de jugador
+#     print("TCP sent: " + TCP_code_1)
+#     """ Descomentar si se quiere probar conexion TCP-IP """
+#     TCPclient.mysend(TCP_code_1)
 
-    # Se muestra tablero y se ejecuta movimiento máquina
-    game.show_board()
-    time.sleep(2)
-    TCP_code_2 = game.cpu_move()
+#     # Se muestra tablero y se ejecuta movimiento máquina
+#     game.show_board()
+#     time.sleep(2)
+#     TCP_code_2 = game.cpu_move()
     
-    # Se codifica mensaje de máquina
-    print("TCP sent: " + TCP_code_2)
-    """ Descomentar si se quiere probar conexion TCP-IP """
-    TCPclient.mysend(TCP_code_2)
+#     # Se codifica mensaje de máquina
+#     print("TCP sent: " + TCP_code_2)
+#     """ Descomentar si se quiere probar conexion TCP-IP """
+#     TCPclient.mysend(TCP_code_2)
 
-    # Se muestra tablero
-    game.show_board()
+#     # Se muestra tablero
+#     game.show_board()
     
-if game.isWinner(1): 
-    print("Ganaste!!!\n")
-elif game.isWinner(2): 
-    print("Perdise!!!\n")
-else:
-    print("Empate!!!\n")
+# if game.isWinner(1): 
+#     print("Ganaste!!!\n")
+# elif game.isWinner(2): 
+#     print("Perdise!!!\n")
+# else:
+#     print("Empate!!!\n")
 
 
 """

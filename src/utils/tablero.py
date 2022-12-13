@@ -1,4 +1,4 @@
-from player import Player
+from utils.player import Player
 
 class Tablero():
     '''
