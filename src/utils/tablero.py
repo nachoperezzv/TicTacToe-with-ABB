@@ -111,19 +111,36 @@ class Tablero():
         self.__pos[pos] = None
 
     
-    def get_player_values(self,player):
+    def get_player_real_values(self,player):
         """
-        Retorna el objeto del jugador solicitado. 
-
+        Retorna el objeto rel del jugador solicitado. 
         params: 
             :arg player: (int) 1 or 2
-        """
-        
+        """        
         p = self.__player1      \
             if int(player) == 1 \
             else self.__player2
 
         return p.get_player_tokens()   
+    
+    def get_player_values(self,player):
+        """
+        Retorna las posiciones en las que se encontrarían los jugadores
+        params: 
+            :arg player: (int) 1 or 2
+        """
+        p = self.__player1      \
+            if int(player) == 1 \
+            else self.__player2
+        
+        symb = p.get_player_symbol()
+
+        values = []
+        for k in self.__pos.keys():
+            if self.__pos[k] == symb:
+                values.append(k)
+
+        return values  
 
     def get_board(self): 
         """ 
