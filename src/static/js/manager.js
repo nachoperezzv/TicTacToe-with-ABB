@@ -134,7 +134,6 @@ function getMove(event){
     p = 2
   }
   
-  console.log(currentCell)
   let pos = "0"
   switch (currentCell) {
     case 0:
@@ -172,8 +171,6 @@ function getMove(event){
   let data = {player: p,
               position: pos};
 
-  console.log(data)
-
   fetch('http://localhost:5000/play/move', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -183,8 +180,12 @@ function getMove(event){
   })
   .then(response => response.json())
   .then(result => {
+    console.log(data)
     console.log(result);
-    makeCPUMove(result["1"]);
+    isWinner();
+    if (result["0"] !== 'Game Over'){
+      makeCPUMove(result["1"]);
+    }
   })
   .catch(error => {
     console.error(error);
@@ -207,6 +208,7 @@ function getMove(event){
   changeBoardHeaderNames();
 }
 
+// FUNCTION TO RECEIVE CPU TOKEN POSITION & SHOW IT
 function makeCPUMove(cpu_cell) {
 
   let cpu_pos = 0;
@@ -244,7 +246,6 @@ function makeCPUMove(cpu_cell) {
       break;
   }
 
-  console.log(cpu_pos);
   let cellToAddTokenCPU = document.querySelector(`[data-id='${cpu_pos}']`);
   cellToAddTokenCPU.textContent = 'O';
   gameBoard[cpu_pos] = 'O';
@@ -261,7 +262,6 @@ function makeCPUMove(cpu_cell) {
 
 // CELL CLICK EVENT FOR PLAYER TO ATTEMPT TO MAKE MOVE
 function makeMove(event) {
-  console.log(turn);
   
   let currentCell = parseInt(event.currentTarget.firstElementChild.dataset.id);
   let cellToAddToken = document.querySelector(`[data-id='${currentCell}']`);
@@ -310,8 +310,6 @@ function makeMove(event) {
 
   let data = {player: p,
               position: pos};
-
-  console.log(data)
 
   fetch('http://localhost:5000/play/move', {
     method: 'POST',
@@ -401,7 +399,6 @@ function isWinner() {
         `;
         winner = true;
         removeCellClickListener();
-        return true;
       } else {
         currentPlayerText.innerHTML = `
           <div class="congratulations">Felicidades ${playerY.name}</div>
@@ -409,7 +406,6 @@ function isWinner() {
         `;
         winner = true;
         removeCellClickListener();
-        return true;
       }
     }
   });
@@ -418,7 +414,7 @@ function isWinner() {
     checkIfTie();
   }
   
-  return false;
+  return winner;
 }
 
 function changeBoardHeaderNames() {
@@ -440,6 +436,22 @@ function changeBoardHeaderNames() {
 
 function resetBoard() {
   console.log('resetting');
+
+  let data = {N: "None"};
+  fetch('http://localhost:5000/play/ResetBoard', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.error(error);
+  });
   
   gameBoard = ['', '', '', '', '', '', '', '', '']; 
   
@@ -457,7 +469,7 @@ function resetBoard() {
     <span class="name--style">${playerX.name}</span>, empiezas tu!
     <div class="u-r-winner"></div>
   `
-
+  
   addCellClickListener();
 }
 

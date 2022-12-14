@@ -202,11 +202,40 @@ class Tablero():
                 print("\n------------------------------------------------")
 
         print("\n\n")
-        
-    def setGameMode(self, mode):
+    
+    def reset_board(self):
+        """
+        Elimina las asignaciones del tablero y las casillas de los jugadores
+        """
+        self.__pos = {
+            'A1':None, 'A2':None, 'A3':None,
+            'B1':None, 'B2':None, 'B3':None,
+            'C1':None, 'C2':None, 'C3':None
+        }   
+
+        player1_tokens = self.__player1.get_player_tokens()
+        p1 = 'J'
+        for pos in player1_tokens: 
+            if pos != None: 
+                p1 = p1 + ',' + str(pos)
+        self.__player1.reset_tokens()
+
+        player2_tokens = self.__player2.get_player_tokens()
+        p2 = 'Q'
+        self.__player2.reset_tokens()
+        for pos in player2_tokens: 
+            if pos != None: 
+                p2 = p2 + ',' + str(pos)
+
+        collect_list = p1 + ';' + p2
+
+        return collect_list
+               
+
+    def set_game_mode(self, mode):
         self.__gameMode = mode
         
-    def getGameMode(self):
+    def get_game_mode(self):
         return self.__gameMode
 
 # USE EXAMPLE
