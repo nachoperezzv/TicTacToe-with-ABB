@@ -97,12 +97,14 @@ def move():
         player, pos =  get_from_request('player'), get_from_request('position') 
 
         if mode == '1':
+            print(pos)
             valid , msg = threeInRow.player_move(pos)            
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 
             msg = threeInRow.cpu_move()
             response = re.split(r';', msg)
+            print(response)
             tcp.mysend(msg)
             
             return set_response(response)
