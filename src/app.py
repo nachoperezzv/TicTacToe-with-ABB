@@ -103,12 +103,13 @@ def move():
 
             if not threeInRow.is_winner(1): 
                 msg = threeInRow.cpu_move()
-                response = re.split(r';', msg)
-                tcp.mysend(msg)
+                
+                if isinstance(msg, str):
+                    response = re.split(r';', msg)
+                    tcp.mysend(msg)
             else: 
                 response = ["Game Over", "end"]
                 
-            
             return set_response(response)
             
         elif mode == '2':
