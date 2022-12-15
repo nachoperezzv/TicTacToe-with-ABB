@@ -103,7 +103,8 @@ def move():
 
             if not threeInRow.is_winner(1): 
                 msg = threeInRow.cpu_move()
-                
+                response = ["None", "None"]
+
                 if isinstance(msg, str):
                     response = re.split(r';', msg)
                     tcp.mysend(msg)
@@ -113,6 +114,7 @@ def move():
             return set_response(response)
             
         elif mode == '2':
+             
             valid , msg = threeInRow.player_move(pos, player)            
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')

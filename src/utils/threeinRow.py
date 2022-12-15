@@ -28,7 +28,7 @@ class ThreeInRow:
         self.__win_possibilities = {"line": ["A", "B", "C", "1", "2", "3"],
                      "diagonal": {"d1": ["A1", "B2", "C3"], "d2":["A3", "B2", "C1"]}}
 
-        self.__mode = None
+        self.__mode = 1     #GameMode 1 por defecto
 
     def __evaluate(self):
         """
