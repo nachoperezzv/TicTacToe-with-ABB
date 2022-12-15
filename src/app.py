@@ -91,7 +91,7 @@ def setGameMode():
 @app.route('/play/move', methods=['POST'])
 def move():
     '''
-    Recibe modomovimiento realizado en la in
+    Recibe modomovimiento realizado en la interfaz y calcula el de la CPU si es necesario 
     '''
     try: 
         mode = threeInRow.get_game_mode()
@@ -103,15 +103,21 @@ def move():
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 
-            msg = threeInRow.cpu_move()
-            response = re.split(r';', msg)
-            tcp.mysend(msg)
-            
+            if not threeInRow.is_winner(1): 
+                msg = threeInRow.cpu_move()
+                response = ["None", "None"]
+
+                if isinstance(msg, str):
+                    response = re.split(r';', msg)
+                    tcp.mysend(msg)
+            else: 
+                response = ["Game Over", "end"]
+                
             return set_response(response)
             
         elif mode == '2':
-            valid , msg = threeInRow.player_move(pos, player)  
-            print(valid, msg)          
+             
+            valid , msg = threeInRow.player_move(pos, player)            
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 
@@ -120,6 +126,26 @@ def move():
         else: 
             logging.error('Modo de juego no válido')
         
+    except ValidationError as e:
+        logging.error(str(e), traceback.format_exc())
+
+@app.route('/play/ResetBoard', methods=['POST'])
+def resetBoard():
+    """
+    Reinicia el tablero utilizado
+    """
+
+    try: 
+        end_positions = threeInRow.reset_game()
+
+        collect_player1 = re.split(r';', end_positions)
+        if end_positions != None: 
+            tcp.mysend(collect_player1[0])
+            tcp.mysend(collect_player1[1])
+        else: logging.error('No es posible recoger las fichas del tablero')
+
+        return set_response('ok')
+
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
 

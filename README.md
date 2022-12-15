@@ -12,9 +12,5 @@ Se ha optado por definir un tablero con 2 jugadores, teniendo cada uno 5 fichas,
 
 ## Por implementar ##
 
-  - mejoras en la inteligencia de la CPU, solo va a ganar, no defiende
-  - retorno de posiciones final de todas las fichas tras game over
+  - Mensajes TCP a partir de casillas por reconocimiento de voz
   
-### A tener en cuenta ###
-
-Sería bueno devolver la posición de todas las fichas del tablero al terminar la partida para así recogerlas y devolverlas a su posición respectiva inicial. 
