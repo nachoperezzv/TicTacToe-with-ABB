@@ -82,6 +82,7 @@ def setGameMode():
     '''
     try:
         threeInRow.set_game_mode(get_from_request('GameMode'))
+        print(threeInRow.get_game_mode())
         return set_response('ok', 200)
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
@@ -97,7 +98,8 @@ def move():
         player, pos =  get_from_request('player'), get_from_request('position') 
 
         if mode == '1':
-            valid , msg = threeInRow.player_move(pos)            
+            valid , msg = threeInRow.player_move(pos)   
+            print(valid, msg)         
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 
@@ -108,7 +110,8 @@ def move():
             return set_response(response)
             
         elif mode == '2':
-            valid , msg = threeInRow.player_move(pos, player)            
+            valid , msg = threeInRow.player_move(pos, player)  
+            print(valid, msg)          
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 

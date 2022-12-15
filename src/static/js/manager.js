@@ -135,6 +135,28 @@ function makeMove(event) {
     if (currentPlayer() === 'X') {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'X';
+
+      data = {
+        'player':'1',
+        'position': currentCell
+      }
+
+      fetch('http://localhost:5000/play/GameMode', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => {
+      console.error(error);
+    });
+      
+
     } else {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'O';
