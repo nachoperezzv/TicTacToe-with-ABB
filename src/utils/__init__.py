@@ -4,8 +4,10 @@ from utils.tablero import Tablero
 from utils.threeinRow import ThreeInRow
 
 from utils.utilities import (
+    set_response,
     get_from_request,
-    set_response
+    get_from_intention,
+    get_max_score
 )
 
 

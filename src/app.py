@@ -4,8 +4,10 @@ from utils import ThreeInRow
 from utils import TCP
 
 from utils import (
-    get_from_request,
-    set_response
+    set_response,
+    get_from_request,    
+    get_from_intention,
+    get_max_score
 )
 
 from custom import ValidationError
@@ -14,6 +16,7 @@ from logger import getFullPatch
 from flask import Flask
 from flask import render_template, request
 
+from transformers import pipeline
 import sys, os, traceback, logging, re
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
@@ -31,6 +34,16 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
 threeInRow = ThreeInRow()
 tcp = TCP()
+
+pipe = pipeline(
+    "zero-shot-classification",
+    model = "facebook/bart-large-mnli"
+)
+labels = [
+    "A1", "A2", "A3",
+    "B1", "B2", "B3",
+    "C1", "C2", "C3"
+]
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
@@ -84,6 +97,24 @@ def setGameMode():
         threeInRow.set_game_mode(get_from_request('GameMode'))
         print(threeInRow.get_game_mode())
         return set_response('ok', 200)
+    except ValidationError as e:
+        logging.error(str(e), traceback.format_exc())
+
+@app.route('/play/getIntention', methods=['GET'])
+def getIntentions():
+    try:
+        text = get_from_request('text')
+        intention = pipe(
+            text,
+            labels,
+            multiclass = False
+        )
+
+        scores = get_from_intention(intention, 'scores')
+        index = get_max_score(scores)
+
+        tcp.mysend(str(index))
+
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
 
