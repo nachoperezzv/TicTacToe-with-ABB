@@ -100,7 +100,7 @@ def setGameMode():
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
 
-@app.route('/play/getIntention', methods=['GET'])
+@app.route('/play/getIntention', methods=['POST'])
 def getIntentions():
     try:
         text = get_from_request('text')
