@@ -32,6 +32,7 @@ if ("webkitSpeechRecognition" in window) {
       }
     }
     
+    // Coordenada en string (p.e. "A1")
     getSpeechMove(lastCoord);
   }
 
