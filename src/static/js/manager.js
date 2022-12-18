@@ -354,6 +354,99 @@ function makeCPUMove(cpu_cell) {
   changeBoardHeaderNames();
 }
 
+function getSpeechMove(pos){
+  let cpu_pos="";
+
+  switch (lastCoordinate) {
+    case "A1":
+      cpu_pos = 0;
+      break;
+    case "A2":
+      cpu_pos = 1;
+      break;
+    case "A3":
+      cpu_pos = 2;
+      break;
+    case "B1":
+      cpu_pos = 3;
+      break;
+    case "B2":
+      cpu_pos = 4;
+      break;
+    case "B3":
+      cpu_pos = 5;
+      break;
+    case "C1":
+      cpu_pos = 6;
+      break;
+    case "C2":
+      cpu_pos = 7;
+      break;
+    case "C3":
+      cpu_pos = 8;
+      break;
+    default:
+      cpu_pos = -1
+      break;
+  }
+  let cellToAddToken = document.querySelector(`[data-id='${cpu_pos}']`);
+
+  // Imprime coordenada encontrada
+  console.log("Coordinate: " + lastCoordinate);
+
+  // Identificacion de jugador
+  let p = currentPlayer() 
+  if (currentPlayer() === 'X') {
+    p = 1
+  } else {
+    p = 2
+  }
+
+  let data = {
+    player: p,
+    position: lastCoordinate
+  
+  };
+  
+  if (cellToAddToken.innerHTML == ''){
+    fetch('http://localhost:5000/play/move', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(data)
+      console.log(result);
+      isWinner();
+      if (result["0"] !== 'Game Over'){
+        console.log("result: " + result["1"]);
+        makeCPUMove(result["1"]);
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    cellToAddToken.textContent = currentPlayer();
+    gameBoard[cpu_pos] = 'X';
+
+    turn++;
+
+    // CHECK IF WE HAVE A WINNER
+    isWinner();
+    
+    // CHANGE BOARD HEADER INFO
+    changeBoardHeaderNames();
+
+  } else {
+    console.log('Esta celda esta ocupada');
+    return;
+  }
+}
+
 // CELL CLICK EVENT FOR PLAYER TO ATTEMPT TO MAKE MOVE
 function makeMove(event) {
   
@@ -427,6 +520,28 @@ function makeMove(event) {
     if (currentPlayer() === 'X') {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'X';
+
+      data = {
+        'player':'1',
+        'position': currentCell
+      }
+
+      fetch('http://localhost:5000/play/GameMode', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => {
+      console.error(error);
+    });
+      
+
     } else {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'O';
@@ -531,7 +646,7 @@ function changeBoardHeaderNames() {
 function resetBoard() {
   console.log('resetting');
 
-  let data = {N: "None"};
+  let data = {"N": "None"};
   fetch('http://localhost:5000/play/ResetBoard', {
     method: 'POST',
     body: JSON.stringify(data),

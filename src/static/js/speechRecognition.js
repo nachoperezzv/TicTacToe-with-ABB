@@ -69,6 +69,24 @@ if ("webkitSpeechRecognition" in window) {
     document.querySelector("#btn__mic__stop").style.display = 'none'
 
     speechRecognition.stop();
+
+    let data = {"text": final_transcript};
+
+    fetch('http://localhost:5000/play/getIntention', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      getSpeechMove(result)
+      console.log(result)
+    })
+    .catch(error => {
+      console.error(error);
+    });
   };
 } else {
   console.log("Speech Recognition Not Available");
