@@ -23,17 +23,8 @@ if ("webkitSpeechRecognition" in window) {
   };
   speechRecognition.onend = () => {
     //document.querySelector("#status").style.display = 'none';
-    console.log("Speech Recognition Ended");
+    console.log("Speech Recognition Ended");    
 
-    lastCoord = "none"
-    for(let i = 0; i<coordinates.length; i++){
-      if (final_transcript.includes(coordinates[i])){
-        lastCoord = coordinates[i];
-      }
-    }
-    
-    // Coordenada en string (p.e. "A1")
-    getSpeechMove(lastCoord);
   }
 
   speechRecognition.onresult = (event) => {
@@ -81,12 +72,14 @@ if ("webkitSpeechRecognition" in window) {
     })
     .then(response => response.json())
     .then(result => {
-      getSpeechMove(result)
+      getSpeechMove(result.intention)
       console.log(result)
     })
     .catch(error => {
       console.error(error);
     });
+
+    getSpeechMove(result);
   };
 } else {
   console.log("Speech Recognition Not Available");

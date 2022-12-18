@@ -6,10 +6,10 @@ from flask import (
 def get_from_request(name):
     return request.json.get(name,None)
 
-def set_response(data, index=200):
+def set_response(data:dict, index:int=200):
     return jsonify(data), index 
 
-def get_from_intention(intention, name:str) -> list:
+def get_from_result(intention, name:str) -> list:
     return intention[name]
 
 def get_max_score(scores:list[float]) -> int:

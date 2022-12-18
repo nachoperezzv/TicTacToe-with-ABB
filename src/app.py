@@ -6,7 +6,7 @@ from utils import TCP
 from utils import (
     set_response,
     get_from_request,    
-    get_from_intention,
+    get_from_result,
     get_max_score,
     get_labels
 )
@@ -74,7 +74,7 @@ def setABBconfig():
         
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
-        return set_response(str(e))
+        return set_response(dict(error=str(e)))
 
 @app.route('/play', methods=['GET'])
 def play():
@@ -95,7 +95,7 @@ def setGameMode():
     try:
         threeInRow.set_game_mode(get_from_request('GameMode'))
         print(threeInRow.get_game_mode())
-        return set_response('ok', 200)
+        return set_response(dict(msg='ok'))
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
 
@@ -105,23 +105,22 @@ def getIntentions():
         text = get_from_request('text')
         labels = get_labels()
         
-        intention = pipe(
+        result = pipe(
             text,
             labels,
             multiclass = False
         )
 
-        print(intention)
+        print(result)
 
-        scores = get_from_intention(intention, 'scores')
+        scores, intention = get_from_result(result, 'scores'), get_from_result(result, 'labels')
         index = get_max_score(scores)
 
-        print(scores, index)
-        print(labels[index])
+        print(intention[0])
 
-        tcp.mysend(labels[index])
+        tcp.mysend(intention[0])
 
-        return labels[index]
+        return set_response(dict(intention = intention[0]))
 
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
@@ -144,13 +143,13 @@ def move():
 
             if not threeInRow.is_winner(1): 
                 msg = threeInRow.cpu_move()
-                response = ["None", "None"]
+                response = {"None":"None"}
 
                 if isinstance(msg, str):
                     response = re.split(r';', msg)
                     tcp.mysend(msg)
             else: 
-                response = ["Game Over", "end"]
+                response = {"Game Over":"end"}
                 
             return set_response(response)
             
@@ -160,7 +159,7 @@ def move():
             if valid: tcp.mysend(msg)
             else: logging.error('Posición seleccionada no válida')
 
-            return set_response('ok')
+            return set_response(dict(msg='ok'))
 
         else: 
             logging.error('Modo de juego no válido')
@@ -183,7 +182,7 @@ def resetBoard():
             tcp.mysend(collect_player1[1])
         else: logging.error('No es posible recoger las fichas del tablero')
 
-        return set_response('ok')
+        return set_response(dict(msg='ok'))
 
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())
