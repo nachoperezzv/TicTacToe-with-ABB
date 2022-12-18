@@ -354,7 +354,7 @@ function makeCPUMove(cpu_cell) {
   changeBoardHeaderNames();
 }
 
-function getSpeechMove(pos){
+function getSpeechMove(lastCoordinate){
   let cpu_pos="";
 
   switch (lastCoordinate) {
