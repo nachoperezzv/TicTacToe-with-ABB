@@ -111,8 +111,13 @@ def getIntentions():
             multiclass = False
         )
 
+        print(intention)
+
         scores = get_from_intention(intention, 'scores')
         index = get_max_score(scores)
+
+        print(scores, index)
+        print(labels[index])
 
         tcp.mysend(labels[index])
 
