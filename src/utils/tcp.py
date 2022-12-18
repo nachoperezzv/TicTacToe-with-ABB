@@ -20,7 +20,7 @@ class TCP:
     
     """
 
-    def __init__(self, host='127.0.0.1', port=4000):
+    def __init__(self, host='172.20.10.120', port=4000):
         """
         Variables de instancia para el objeto
 

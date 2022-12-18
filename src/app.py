@@ -7,7 +7,8 @@ from utils import (
     set_response,
     get_from_request,    
     get_from_intention,
-    get_max_score
+    get_max_score,
+    get_labels
 )
 
 from custom import ValidationError
@@ -39,11 +40,6 @@ pipe = pipeline(
     "zero-shot-classification",
     model = "facebook/bart-large-mnli"
 )
-labels = [
-    "A1", "A2", "A3",
-    "B1", "B2", "B3",
-    "C1", "C2", "C3"
-]
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'wav'}
 
@@ -104,6 +100,8 @@ def setGameMode():
 def getIntentions():
     try:
         text = get_from_request('text')
+        labels = get_labels()
+        
         intention = pipe(
             text,
             labels,
@@ -113,7 +111,9 @@ def getIntentions():
         scores = get_from_intention(intention, 'scores')
         index = get_max_score(scores)
 
-        tcp.mysend(str(index))
+        tcp.mysend(labels[index])
+
+        return labels[index]
 
     except ValidationError as e:
         logging.error(str(e), traceback.format_exc())

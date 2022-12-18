@@ -7,7 +7,8 @@ from utils.utilities import (
     set_response,
     get_from_request,
     get_from_intention,
-    get_max_score
+    get_max_score,
+    get_labels
 )
 
 

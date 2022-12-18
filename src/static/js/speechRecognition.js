@@ -56,7 +56,7 @@ if ("webkitSpeechRecognition" in window) {
     speechRecognition.stop();
 
     let data = {"text": final_transcript};
-    
+
     fetch('http://localhost:5000/play/getIntention', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -66,6 +66,7 @@ if ("webkitSpeechRecognition" in window) {
     })
     .then(response => response.json())
     .then(result => {
+      getSpeechMove(result)
       console.log(result)
     })
     .catch(error => {
