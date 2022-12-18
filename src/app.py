@@ -12,7 +12,10 @@ from utils import (
 )
 
 from custom import ValidationError
-from logger import getFullPatch
+from logger import (
+    getFullPatch,
+    createLogger
+)
 
 from flask import Flask
 from flask import render_template, request
@@ -20,7 +23,11 @@ from flask import render_template, request
 from transformers import pipeline
 import sys, os, traceback, logging, re
 
+
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
+
+createLogger()
+
 logging.basicConfig(
     filename=f'{getFullPatch()}/log/logger.log',
     filemode='a',
