@@ -98,12 +98,118 @@
                     class="collapse">
                     <p>
                         En el modo de dos jugadores, se requieren dos usuarios. Estos moverán por turnos y el robot realizará los movmientos que se indiquen
-                        por voz o mediante Drag&Drop. Un jugador podrá mover ficha cuando el robot haya completado su movimiento.
-                        Esta información aparecerá en pantalla.
+                        por voz o mediante clicks en la celda en la que el usuario deba mover su siguiente ficha. Un jugador podrá mover ficha cuando el 
+                        robot haya completado su movimiento. 
                     </p>
                 </div>
             </div>
             <!-- Tutorial Text - Two Players Mode -->
+
+            <!-- Tutorial Text - Reconocimiento de voz -->
+            <div
+                id="tutorial-q3-select-language" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q3-select-language-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ3" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Cómo funciona el reconocimiento de voz?
+                </p>
+                <div
+                    id="collapseQ3" 
+                    class="collapse">
+                    <p>
+                        Al jugar podrá observar un microfono y un cuadro de texto (inicialmente vacío). Puede jugar tanto haciendo click como indicando
+                        por voz la posición de la nueva ficha. Para ello, haga click sobre el microfono. Verá que cambiará de color. A medida que vaya 
+                        hablando verá como el texto va apareciendo en el cuadro de text. A medida que el sistema reconozca la voz irá oscureciendose.
+                        Mientras que no vuelva a pulsar el botón, el microfono permanecerá activo y no será hasta que lo vuelva a pulsar, que cambiará de 
+                        color y se enviará el movimiento indicado al robot. 
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Reconocimiento de voz -->
+
+            <!-- Tutorial Text - Instrucciones de las posiciones -->
+            <div
+                id="tutorial-q3-select-language" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q3-select-language-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ3" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Que nombre tienen asignado las casillas para poder dar una instrucción por voz?
+                </p>
+                <div
+                    id="collapseQ3" 
+                    class="collapse">
+                    <p>
+                        Cada casilla tiene un nombre asignado. De esta manera para que la ficha se coloque en la posición adecuada debe tener en cuenta 
+                        que el tablero se distribuye de la siguiente forma: <br>
+                        <table>
+                            <tr>
+                              <td>|</td>
+                              <td>A1</td>
+                              <td>|</td>
+                              <td>A2</td>
+                              <td>|</td>
+                              <td>A3</td>
+                              <td>|</td>
+                            </tr>
+                            <tr>
+                              <td>|</td>
+                              <td>B1</td>
+                              <td>|</td>
+                              <td>B2</td>
+                              <td>|</td>
+                              <td>B3</td>
+                              <td>|</td>
+                            </tr>
+                            <tr>
+                              <td>|</td>
+                              <td>C1</td>
+                              <td>|</td>
+                              <td>C2</td>
+                              <td>|</td>
+                              <td>C3</td>
+                              <td>|</td>
+                            </tr>
+                        </table>     
+                        <br>
+                        Algunos ejemplos de uso podrían ser: "Mueve la ficha a la posición A1", "Ficha a B2", "C3", "Posición C2"
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Instrucciones de las posiciones -->
+
+            <!-- Tutorial Text - Posición incorrecta -->
+            <div
+                id="tutorial-q3-select-language" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245); text-align: justify;"
+                >
+                <p
+                    id="tutorial-q3-select-language-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ3" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Qué ocurre si le indico una posición incorrecta o el sistema detecta mal mi voz?
+                </p>
+                <div
+                    id="collapseQ3" 
+                    class="collapse">
+                    <p>
+                        En caso de que el sistema detecte mal su voz pruebe a repetir la frase. De momento no existe un botón para repetir la 
+                        instrucción de voz. 
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Posición incorrecta -->
 
             <!-- Tutorial Text - Selección de Idioma -->
             <div
@@ -208,6 +314,30 @@
                 </div>
             </div>
             <!-- Tutorial Text - Multijugador -->
+
+            <!-- Tutorial Text - Multijugador -->
+            <div
+                id="tutorial-q6-multijugador" 
+                class="container-fluid rounded-3 pt-2 my-1"                
+                style="background-color: rgb(245, 245, 245);"
+                >
+                <p
+                    id="tutorial-q6-multijugador-text"
+                    style="text-align: start; font-weight: bold;"
+                    class="btn" data-bs-toggle="collapse" href="#collapseQ6" role="button" aria-expanded="true" aria-controls="collapseExample"
+                    >
+                    ¿Puedo jugar desde una IP distinta al localhost?
+                </p>
+                <div
+                    id="collapseQ6" 
+                    class="collapse">
+                    <p>
+                        No. Esta opción actualmente no se encuentra disponible pero se esta trabajando en ella. 
+                    </p>
+                </div>
+            </div>
+            <!-- Tutorial Text - Multijugador -->
+
         </div>
         <!-- Tutorials -->
 

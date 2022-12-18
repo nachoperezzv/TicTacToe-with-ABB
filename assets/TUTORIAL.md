@@ -1,0 +1,3 @@
+# Tutorial - guía para moverse por la interfaz y jugar correctamente
+
+Explicación breve de que hacer en cada pantalla, modos de juego, configuración de idioma, etc ...
