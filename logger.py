@@ -6,13 +6,4 @@ def getFullPatch():
     except Exception as e:
         print("fallo en el path")
     return dir
-
-def createLogger():
-    try:
-        if os.path.exists('./log') == False:
-            os.mkdir('log')
-        return True
-        
-    except Exception as e:
-        print('Fallo al crear logger')
-        return False    
+ 
