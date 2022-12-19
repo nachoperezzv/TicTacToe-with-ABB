@@ -405,7 +405,6 @@ function getSpeechMove(lastCoordinate){
   let data = {
     player: p,
     position: lastCoordinate
-  
   };
   
   if (cellToAddToken.innerHTML == ''){
