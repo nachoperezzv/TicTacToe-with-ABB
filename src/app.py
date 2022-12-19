@@ -138,8 +138,7 @@ def resetBoard():
 
         collect_player1 = re.split(r';', end_positions)
         if end_positions != None: 
-            tcp.mysend(collect_player1[0])
-            tcp.mysend(collect_player1[1])
+            tcp.mysend(collect_player1[0] + " " + collect_player1[1])
         else: logging.error('No es posible recoger las fichas del tablero')
 
         return set_response('ok')
