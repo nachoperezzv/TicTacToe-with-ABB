@@ -1,3 +1,4 @@
+from time import sleep
 from utils import Tablero
 from utils import Player
 from utils import ThreeInRow
@@ -107,6 +108,7 @@ def move():
 
                 if isinstance(msg, str):
                     response = re.split(r';', msg)
+                    sleep(1)
                     tcp.mysend(msg)
             else: 
                 response = ["Game Over", "end"]
