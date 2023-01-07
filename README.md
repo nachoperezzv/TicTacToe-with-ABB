@@ -73,7 +73,7 @@ Cabe destacar que el servidor para la comunicación se puede encontrar tanto en 
 
 Tras cargar la estación de la misma manera. Debe realizar el traspaso de la tarea a la controladora del robot, conectándose vía Ethernet o Wifi (dependiendo de las comunicaciones que esta tenga configuradas). 
 
-Para acceder a la información de la controladora real desde RobotStudio puede incluirla desde `Archivo->En línea->Conexión con un clic`. Una vez realizado, se puede ejecutar de la misma manera que en simulación si el robot se encuentra en Automático, de otro modo, se deberá ejecutar y conrolar la tarea desde la Flexpendant. 
+Para acceder a la controladora real desde RobotStudio puede incluirla desde `Archivo->En línea->Conexión con un clic`. Seguidamente se ha de traspasar la tarea completa (con sus módulos correspondientes) a la nueva controladora añadida, a partir de la virtual. Una vez realizado, se puede ejecutar de la misma manera que en simulación si el robot se encuentra en Automático, de otro modo, se deberá ejecutar y controlar la tarea desde la Flexpendant. 
 
 Es destacable que en este caso el servidor para la comunicación TCP ha de encontrarse en la dirección de la controladora del robot, por lo que se ha de modificar la dirección configurada en la aplicación que gestiona la interfaz. 
 
