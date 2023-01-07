@@ -28,7 +28,7 @@ Tras hacer la selección del modo de juego deberá introducir el nombre de los j
 
 ### Modo UN JUGADOR
 
-Jugará contra la máquina. En este caso, usted, el jugador uno siempre tendrá el primer turno. En cuanto seleccioone la siguiente casilla en la que colocar la pieza, la computadora procesará el siguiente movimiento y automaticamente lo verá reflejado en el casillero. Así mismo, independientemente de si esta jugando en simulación o en robot real, recomendamos unos segundos de espera antes de ejecutar el siguiente movimiento. Normalmente hasta que el robot acabe de mover ambas piezas. 
+Jugará contra la máquina. En este caso, usted, el jugador uno siempre tendrá el primer turno. En cuanto seleccione la siguiente casilla en la que colocar la pieza, la computadora procesará el siguiente movimiento y automaticamente lo verá reflejado en el casillero. Así mismo, independientemente de si esta jugando en simulación o en robot real, recomendamos unos segundos de espera antes de ejecutar el siguiente movimiento. Normalmente hasta que el robot acabe de mover ambas piezas. 
 
 ### Modo MULTIJUGADOR
 
@@ -46,7 +46,7 @@ Una vez se ha seleccionado el modo de juega deberá ir indicando a medida que pr
 Debe tener en cuenta que el juego dura hasta que: 
 
 1. Todas las casillas queden completas.
-2. Cualquiera de los 2 jugadores se declare ganador.2
+2. Cualquiera de los 2 jugadores se declare ganador.
 
 ### Click sobre la pantalla
 
