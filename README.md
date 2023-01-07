@@ -9,7 +9,7 @@
 6. [Ejecución](#ejecute-la-app)
 7. [ABB en simulación](#si-va-a-usar-los-abb-en-simulación)
 8. [ABB reales](#si-va-a-usar-los-abb-reales)
-
+9. [Apuntes](#apuntes)
 
 ## Instalación y ejecución
 
