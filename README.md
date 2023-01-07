@@ -7,9 +7,9 @@
 4. [Entorno Virtual](#crear-un-entorno-virtual-y-activarlo)
 5. [Instalación de Dependencias](#instale-las-dependencias-necesarias)
 6. [Ejecución](#ejecute-la-app)
-7. [ABB en simulación](#si-va-a-usar-los-abb-en-simulación)
-8. [ABB reales](#si-va-a-usar-los-abb-reales)
-9. [Apuntes](#apuntes)
+7. [ABB en simulación](#si-va-a-utilizar-el-abb-en-simulación)
+8. [ABB real](#si-va-a-utlizar-el-abb-real)
+9. [Implementación](#implementación)
 
 ## Instalación y ejecución
 
