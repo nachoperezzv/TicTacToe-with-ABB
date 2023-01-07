@@ -1,8 +1,14 @@
 # Tic Tac Toe 
 
 ## Índice
-1. [Índice](#Índice)
-2. [Instalación](#instalacion-y-ejecucion)
+1. [Índice](#índice)
+2. [Instalación](#instalación-y-ejecución)
+3. [Clonación del repositorio](#clonar-el-repositorio)
+4. [Entorno Virtual](#crear-un-entorno-virtual-y-activarlo)
+5. [Instalación de Dependencias](#instale-las-dependencias-necesarias)
+6. [Ejecución](#ejecute-la-app)
+7. [ABB en simulación](#si-va-a-usar-los-abb-en-simulación)
+8. [ABB reales](#si-va-a-usar-los-abb-reales)
 
 
 ## Instalación y ejecución
