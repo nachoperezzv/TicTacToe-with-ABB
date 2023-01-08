@@ -58,7 +58,6 @@ document.querySelector('#playmode-twoplayers-btn').onclick = () => {
   });
 }
 
-
  // INITIALIZE APP
 function app() {
   let inputField = document.querySelector('.input-field').focus();
@@ -121,13 +120,398 @@ function buildBoard() {
   changeBoardHeaderNames();
 }
 
+// CELL CLICK EVENT FOR PLAYER TO ATTEMPT TO MAKE MOVE AND RESOLVE CPU MOVE
+function getMove(event){
+
+  let currentCell = parseInt(event.currentTarget.firstElementChild.dataset.id);
+  let cellToAddToken = document.querySelector(`[data-id='${currentCell}']`);
+
+  let p = currentPlayer() 
+
+  if (currentPlayer() === 'X') {
+    p = 1
+  } else {
+    p = 2
+  }
+  
+  let pos = "0"
+  switch (currentCell) {
+    case 0:
+      pos = "A1";
+      break;
+    case 1:
+      pos = "A2";
+      break;
+    case 2:
+      pos = "A3";
+      break;
+    case 3:
+      pos = "B1";
+      break;
+    case 4:
+      pos = "B2";
+      break;
+    case 5:
+      pos = "B3";
+      break;
+    case 6:
+      pos = "C1";
+      break;
+    case 7:
+      pos = "C2";
+      break;
+    case 8:
+      pos = "C3";
+      break;
+    default:
+      pos = "00"
+      break;
+  }
+
+  let data = {player: p,
+              position: pos};
+
+  fetch('http://localhost:5000/play/move', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(data)
+    console.log(result);
+    isWinner();
+    if (result["0"] !== 'Game Over'){
+      makeCPUMove(result["1"]);
+    }
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+  if (cellToAddToken.innerHTML !== '') {
+    console.log('Esta celda esta ocupada');
+    return;
+  } else {
+    cellToAddToken.textContent = currentPlayer();
+    gameBoard[currentCell] = 'X';
+  }
+
+  turn++;
+
+  // CHECK IF WE HAVE A WINNER
+  isWinner();
+  
+  // CHANGE BOARD HEADER INFO
+  changeBoardHeaderNames();
+}
+
+function getSpeechMove(lastCoordinate){
+  
+    if (lastCoordinate != "none"){
+
+      let cpu_pos="";
+
+      switch (lastCoordinate) {
+        case "A1":
+          cpu_pos = 0;
+          break;
+        case "A2":
+          cpu_pos = 1;
+          break;
+        case "A3":
+          cpu_pos = 2;
+          break;
+        case "B1":
+          cpu_pos = 3;
+          break;
+        case "B2":
+          cpu_pos = 4;
+          break;
+        case "B3":
+          cpu_pos = 5;
+          break;
+        case "C1":
+          cpu_pos = 6;
+          break;
+        case "C2":
+          cpu_pos = 7;
+          break;
+        case "C3":
+          cpu_pos = 8;
+          break;
+        default:
+          cpu_pos = -1
+          break;
+      }
+      let cellToAddToken = document.querySelector(`[data-id='${cpu_pos}']`);
+
+      // Imprime coordenada encontrada
+      console.log("Coordinate: " + lastCoordinate);
+
+      // Identificacion de jugador
+      let p = currentPlayer() 
+      if (currentPlayer() === 'X') {
+        p = 1
+      } else {
+        p = 2
+      }
+
+      let data = {player: p,
+        position: lastCoordinate};
+      
+      if (cellToAddToken.innerHTML == ''){
+        fetch('http://localhost:5000/play/move', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log(data)
+          console.log(result);
+          isWinner();
+          if (result["0"] !== 'Game Over'){
+            console.log("result: " + result["1"]);
+            makeCPUMove(result["1"]);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+        cellToAddToken.textContent = currentPlayer();
+        gameBoard[cpu_pos] = 'X';
+
+        turn++;
+    
+        // CHECK IF WE HAVE A WINNER
+        isWinner();
+        
+        // CHANGE BOARD HEADER INFO
+        changeBoardHeaderNames();
+
+      } else {
+        console.log('Esta celda esta ocupada');
+        return;
+      }
+    }
+}
+
+// FUNCTION TO RECEIVE CPU TOKEN POSITION & SHOW IT
+function makeCPUMove(cpu_cell) {
+
+  let cpu_pos = 0;
+
+  switch (cpu_cell) {
+    case "A1":
+      cpu_pos = 0;
+      break;
+    case "A2":
+      cpu_pos = 1;
+      break;
+    case "A3":
+      cpu_pos = 2;
+      break;
+    case "B1":
+      cpu_pos = 3;
+      break;
+    case "B2":
+      cpu_pos = 4;
+      break;
+    case "B3":
+      cpu_pos = 5;
+      break;
+    case "C1":
+      cpu_pos = 6;
+      break;
+    case "C2":
+      cpu_pos = 7;
+      break;
+    case "C3":
+      cpu_pos = 8;
+      break;
+    default:
+      cpu_pos = -1
+      break;
+  }
+
+  let cellToAddTokenCPU = document.querySelector(`[data-id='${cpu_pos}']`);
+  cellToAddTokenCPU.textContent = 'O';
+  gameBoard[cpu_pos] = 'O';
+
+  // CHECK IF WE HAVE A WINNER
+  isWinner();
+    
+  // Update turn count so next player can choose
+  turn ++;
+
+  // CHANGE BOARD HEADER INFO
+  changeBoardHeaderNames();
+}
+
+function getSpeechMove(lastCoordinate){
+  let cpu_pos="";
+
+  switch (lastCoordinate) {
+    case "A1":
+      cpu_pos = 0;
+      break;
+    case "A2":
+      cpu_pos = 1;
+      break;
+    case "A3":
+      cpu_pos = 2;
+      break;
+    case "B1":
+      cpu_pos = 3;
+      break;
+    case "B2":
+      cpu_pos = 4;
+      break;
+    case "B3":
+      cpu_pos = 5;
+      break;
+    case "C1":
+      cpu_pos = 6;
+      break;
+    case "C2":
+      cpu_pos = 7;
+      break;
+    case "C3":
+      cpu_pos = 8;
+      break;
+    default:
+      cpu_pos = -1
+      break;
+  }
+  let cellToAddToken = document.querySelector(`[data-id='${cpu_pos}']`);
+
+  // Imprime coordenada encontrada
+  console.log("Coordinate: " + lastCoordinate);
+
+  // Identificacion de jugador
+  let p = currentPlayer() 
+  if (currentPlayer() === 'X') {
+    p = 1
+  } else {
+    p = 2
+  }
+
+  let data = {
+    player: p,
+    position: lastCoordinate
+  };
+  
+  if (cellToAddToken.innerHTML == ''){
+    fetch('http://localhost:5000/play/move', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(data)
+      console.log(result);
+      isWinner();
+      if (result["0"] !== 'Game Over'){
+        console.log("result: " + result["1"]);
+        makeCPUMove(result["1"]);
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    cellToAddToken.textContent = currentPlayer();
+    gameBoard[cpu_pos] = 'X';
+
+    turn++;
+
+    // CHECK IF WE HAVE A WINNER
+    isWinner();
+    
+    // CHANGE BOARD HEADER INFO
+    changeBoardHeaderNames();
+
+  } else {
+    console.log('Esta celda esta ocupada');
+    return;
+  }
+}
+
 // CELL CLICK EVENT FOR PLAYER TO ATTEMPT TO MAKE MOVE
 function makeMove(event) {
-  console.log(turn);
   
   let currentCell = parseInt(event.currentTarget.firstElementChild.dataset.id);
   let cellToAddToken = document.querySelector(`[data-id='${currentCell}']`);
   
+  let p = currentPlayer() 
+
+  if (currentPlayer() === 'X') {
+    p = 1
+  } else {
+    p = 2
+  }
+  
+  let pos = "0"
+  switch (currentCell) {
+    case 0:
+      pos = "A1";
+      break;
+    case 1:
+      pos = "A2";
+      break;
+    case 2:
+      pos = "A3";
+      break;
+    case 3:
+      pos = "B1";
+      break;
+    case 4:
+      pos = "B2";
+      break;
+    case 5:
+      pos = "B3";
+      break;
+    case 6:
+      pos = "C1";
+      break;
+    case 7:
+      pos = "C2";
+      break;
+    case 8:
+      pos = "C3";
+      break;
+    default:
+      pos = "00"
+      break;
+  }
+
+  let data = {player: p,
+              position: pos};
+
+  fetch('http://localhost:5000/play/move', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
   if (cellToAddToken.innerHTML !== '') {
     console.log('Esta celda esta ocupada');
     return;
@@ -135,6 +519,28 @@ function makeMove(event) {
     if (currentPlayer() === 'X') {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'X';
+
+      data = {
+        'player':'1',
+        'position': currentCell
+      }
+
+      fetch('http://localhost:5000/play/GameMode', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => {
+      console.error(error);
+    });
+      
+
     } else {
       cellToAddToken.textContent = currentPlayer();
       gameBoard[currentCell] = 'O';
@@ -201,7 +607,6 @@ function isWinner() {
         `;
         winner = true;
         removeCellClickListener();
-        return true;
       } else {
         currentPlayerText.innerHTML = `
           <div class="congratulations">Felicidades ${playerY.name}</div>
@@ -209,7 +614,6 @@ function isWinner() {
         `;
         winner = true;
         removeCellClickListener();
-        return true;
       }
     }
   });
@@ -218,7 +622,7 @@ function isWinner() {
     checkIfTie();
   }
   
-  return false;
+  return winner;
 }
 
 function changeBoardHeaderNames() {
@@ -240,6 +644,22 @@ function changeBoardHeaderNames() {
 
 function resetBoard() {
   console.log('resetting');
+
+  let data = {"N": "None"};
+  fetch('http://localhost:5000/play/ResetBoard', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.error(error);
+  });
   
   gameBoard = ['', '', '', '', '', '', '', '', '']; 
   
@@ -257,21 +677,36 @@ function resetBoard() {
     <span class="name--style">${playerX.name}</span>, empiezas tu!
     <div class="u-r-winner"></div>
   `
-
+  
   addCellClickListener();
 }
 
 function addCellClickListener() {
+  
   const cells = document.querySelectorAll('.board__cell');
-  cells.forEach( cell => {
-    cell.addEventListener('click', makeMove);
-  });
+  
+  if(mode == '1'){
+    cells.forEach( cell => {
+      cell.addEventListener('click', getMove);
+    });
+  }else{
+    cells.forEach( cell => {
+      cell.addEventListener('click', makeMove);
+    });
+  }
+  
 }
 
 function removeCellClickListener() {
   let allCells = document.querySelectorAll('.board__cell');
-  allCells.forEach( cell => {
-    cell.removeEventListener('click', makeMove);
-  });
+  if(mode == '1'){
+    allCells.forEach( cell => {
+      cell.removeEventListener('click', getMove);
+    });
+  }else{
+    cells.forEach( cell => {
+      cell.addEventListener('click', makeMove);
+    });
+  }
 }
 

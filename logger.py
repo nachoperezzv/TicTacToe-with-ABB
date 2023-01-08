@@ -1,4 +1,4 @@
-import os.path
+import os
 
 def getFullPatch():
     try:
@@ -6,3 +6,4 @@ def getFullPatch():
     except Exception as e:
         print("fallo en el path")
     return dir
+ 

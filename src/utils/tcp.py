@@ -1,4 +1,17 @@
-import socket
+from custom import ValidationError
+from logger import getFullPatch
+
+import socket, sys, os, traceback, logging
+
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
+logging.basicConfig(
+    filename=f'{getFullPatch()}/log/logger.log',
+    filemode='a',
+    level=logging.INFO,
+    encoding='utf-8', 
+    format='%(asctime)s - %(levelname)s:%(filename)s:%(message)s',
+    datefmt='%d/%m/%Y;%H:%M:%S'
+)
 
 class TCP:
     """
@@ -7,7 +20,7 @@ class TCP:
     
     """
 
-    def __init__(self, host='localhost', port=4000):
+    def __init__(self, host='127.0.0.1', port=4000):
         """
         Variables de instancia para el objeto
 
@@ -16,10 +29,37 @@ class TCP:
             :port   :   puerto por el que se realiza, por defecto el 4000
         """
 
-        self.host = host
-        self.port = port
+        self.__host = host
+        self.__port = port
     
+    def set_port(self, port):
+        self.__port = port
+
+    def set_host(self, host): 
+        self.__host = host
+ 
+    def mysend(self, msg):
+
+        """
+        Método para el envío de mensajes. Internamente se encarga de abrir la conexión, 
+        codificar el mensaje, enviarlo y recibir la comprobación de llegada. 
+
+        Retorna un valor 'True' si el envío se ha realizado con éxito
+
+        params: 
+            :arg msg     : (str) cualquier cadena de texto a enviar por el socket
+        """
+        try:
+            self.__connect()
+            # bmsg = bytes(msg, 'ascii')
+            self.sock.send(self.__to_bytes(msg))
+            self.receive = self.__myreceive()
+
+            return True if self.receive != None else False
     
+        except ValidationError as e:
+            logging.error(str(e), traceback.format_exc())
+        
     def __connect(self):
 
         """
@@ -35,34 +75,9 @@ class TCP:
         """
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         
-        self.sock.connect((self.host, self.port))
+        self.sock.connect((self.__host, self.__port))
 
-    
-
-    def mysend(self, msg):
-
-        """
-        Método para el envío de mensajes. Internamente se encarga de abrir la conexión, 
-        codificar el mensaje, enviarlo y recibir la comprobación de llegada. 
-
-        Retorna un valor 'True' si el envío se ha realizado con éxito
-
-        params: 
-            :arg msg     : (str) cualquier cadena de texto a enviar por el socket
-        """
-        
-        self.__connect()
-
-        bmsg = bytes(msg, 'ascii')
-
-        self.sock.send(bmsg)
-
-        self.receive = self.myreceive()
-
-        return True if self.receive != None else False
-       
-    
-    def myreceive(self):
+    def __myreceive(self):
 
         """
         Recepción de mensajes, decodificación y retorno de una cadena de texto. 
@@ -73,14 +88,19 @@ class TCP:
         El mensaje recibido por este método no se almacena en una variable de instancia, 
         solo se retorna
         """
-        
-        bmsg = self.sock.recv(1024)
+        try: 
+            bmsg = self.sock.recv(1024)
+            msg = str(bmsg, 'ascii')
+
+            return msg
+
+        except ValidationError as e:
+            logging.error(str(e), traceback.format_exc())
+
+    def __to_bytes(self, msg):
+        return bytes(msg, 'ascii')
     
-        msg = str(bmsg, 'ascii')
-
-        return msg
-
-
+    
   
 # Ejemplo de prueba: 
 """

@@ -73,6 +73,20 @@ class Player():
 
         return self.__symbol
 
+    def reset_tokens(self):
+        """
+        Elimina las asignaciones de posición de las fichas del jugador
+        """
+        self.__tokens = {
+            '1':None,
+            '2':None,
+            '3':None, 
+            '4':None, 
+            '5':None
+        } 
+
+        self.__usedTokens = 0
+
 
 # USE EXAMPLE 
 """

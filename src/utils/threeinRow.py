@@ -11,22 +11,12 @@ from os import system
 COMBINAR EN ESTA CLASE SOLO LA LÓGICA DEL 3 EN RAYA
 """
 
-def clear_window(): 
-    """
-    Clears the console
-    """
-    os_name = platform.system().lower()
-    if 'windows' in os_name:
-        system('cls')
-    else:
-        system('clear')
 
 class ThreeInRow: 
     """
     Lógica de juego para el 3 en línea
     
     """
-
     def __init__(self) -> None:
         
         """
@@ -34,10 +24,11 @@ class ThreeInRow:
             Definición de las posibilidades de victoria (línea en filas o columnas y en diagonales)
         """
         
-        self.__board = Tablero()
-        
+        self.__board = Tablero()        
         self.__win_possibilities = {"line": ["A", "B", "C", "1", "2", "3"],
                      "diagonal": {"d1": ["A1", "B2", "C3"], "d2":["A3", "B2", "C1"]}}
+
+        self.__mode = 1     #GameMode 1 por defecto
 
     def __evaluate(self):
         """
@@ -48,9 +39,9 @@ class ThreeInRow:
         el usuario es negativa, si no hay ganador aún es neutral
         """
 
-        if self.isWinner(1): 
+        if self.is_winner(1): 
             return -1
-        elif self.isWinner(2): 
+        elif self.is_winner(2): 
             return 1
         else:
             return 0 
@@ -89,7 +80,13 @@ class ThreeInRow:
         
         return best
 
-    def isWinner(self, player):
+    def set_game_mode(self, mode):
+        self.__mode = mode
+    
+    def get_game_mode(self):
+        return self.__mode
+
+    def is_winner(self, player):
         """
         Comprueba si el jugador es ganador. 
         Se revisa si los tokens de este se encuentran en una de las dos diagonales. 
@@ -104,8 +101,8 @@ class ThreeInRow:
         values = self.__board.get_player_values(player)    
 
         # Comprobación de diagonales para los tokens del jugador
-        if  ("a1" in values and "b2" in values and "c3" in values) or \
-            ("a3" in values and "b2" in values and "c1" in values):
+        if  ("A1" in values and "B2" in values and "C3" in values) or \
+            ("A3" in values and "B2" in values and "C1" in values):
             winner = True
 
         # Si no es ganador aún, comprobación de filas y columnas
@@ -129,7 +126,7 @@ class ThreeInRow:
 
         Devuelve quién ha ganado, en caso de que siga en juego 'False'.
         """
-        return self.isWinner(1) or self.isWinner(2)
+        return self.is_winner(1) or self.is_winner(2)
 
     def player_move(self, pos, player=1) -> bool: 
         """
@@ -199,7 +196,6 @@ class ThreeInRow:
             depth = len(self.__board.empty_cells())
             pos,_ = self.__minimax(depth, isCpu=True)
             
-            print("Movimiento  CPU: " + str(pos) + "\n")
             _, TCP_code = self.player_move(pos, player)
 
         return TCP_code
@@ -213,6 +209,24 @@ class ThreeInRow:
 
     def get_board(self):
         return self.__board.get_board()
+
+    def reset_game(self): 
+        """
+        Reinicia la partida, limpiando el tablero.
+        Retorna la posición de las fichas de cada jugador. 
+        """
+        return self.__board.reset_board()
+
+def clear_window(): 
+    """
+    Clears the console
+    """
+    os_name = platform.system().lower()
+    if 'windows' in os_name:
+        system('cls')
+    else:
+        system('clear')
+
 
 # ____________________________ USE EXAMPLE ________________________________________
 
@@ -246,9 +260,9 @@ class ThreeInRow:
 #     # Se muestra tablero
 #     game.show_board()
     
-# if game.isWinner(1): 
+# if game.is_winner(1): 
 #     print("Ganaste!!!\n")
-# elif game.isWinner(2): 
+# elif game.is_winner(2): 
 #     print("Perdise!!!\n")
 # else:
 #     print("Empate!!!\n")

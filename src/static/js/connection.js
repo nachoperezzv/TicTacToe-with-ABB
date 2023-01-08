@@ -5,6 +5,7 @@ const ips = [
 ];
 
 const ports = [
+    "4000",
     "5000", 
     "5005",
     "5050",
@@ -26,8 +27,8 @@ for (let i = 0; i < ports.length; i++) {
     select_port.options[i] = new Option(ports[i]);
 }
  
-select_ip.selectedIndex = 1;
-select_port.selectedIndex = 3;
+select_ip.selectedIndex = 3;
+select_port.selectedIndex = 1;
 updateABBconfig();
 
 function updateABBconfig() {
