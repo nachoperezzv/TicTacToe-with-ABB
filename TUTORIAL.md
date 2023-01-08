@@ -16,15 +16,14 @@ Esta aplicación, de momento, se ejecuta de forma local, por lo que no requiere 
 
 ## Modos de juego
 
-<!-- Añadir foto primera pantalla - Play - con los dos modos de juego -->
+![Modos de juego](/assets/png/modos_de_juego.png)
+
 Se puede seleccionar entre dos tipos de juego diferentes: 
 
 1. Modo UN JUGADOR
 2. Modo DOS JUGADORES
 
 Tras hacer la selección del modo de juego deberá introducir el nombre de los jugadores. Si ha elegido el modo UN JUGADOR deberá darle un nombre a la máquina y seleccionar uno para si mismo. Si ha elegido el modo DOS JUGADORES cada uno de los participantes deberá darse un nombre de jugador a si mismo. 
-
-<!-- Añadir foto de pantalla de nombre de jugadores -->
 
 ### Modo UN JUGADOR
 
@@ -36,7 +35,7 @@ En este caso, jugará contra otro compañero. Al igual que antes, el jugador 1 e
 
 ## Cómo jugar
 
-<!-- imagen del tablero -->
+![Tablero](/assets/png/tablero.png)
 
 Una vez se ha seleccionado el modo de juega deberá ir indicando a medida que progresa el juego donde quiere colocar la siguiente ficha. Esta acción de dos formas diferentes: 
 
@@ -62,15 +61,13 @@ A1, A2, A2, B1, B2, B3, C1, C2, C3
 
 Para indicar la posición a la que quiere mover la siguiente ficha, solo tiene que abrir el microfono (pulsando el botón), decir la posición, y cerrar el microfono (pulsandolo de nuevo). Un ejemplo podría ser: 
 
-<!-- Botón de microfono -->
-
 1. "Mueve la ficha a la posición A1"
 2. "Ficha a posición B1"
 3. "C1" 
 
 ## Configuración
 
-<!-- imagen de la pantalla de configuración -->
+![Configuracion](/assets/png/configuracion.png)
 
 Dispone de una pantalla de configuración que le pedirá 2 cosas. 
 
@@ -80,13 +77,13 @@ Dispone de una pantalla de configuración que le pedirá 2 cosas.
 
 ## Tutorial
 
-<!-- Añadir foto página tutorial -->
+![Tutorial](/assets/png/tutorial.png)
 
 En caso de que tuviese alguna duda más, dispone de un tutorial completo de usuario en el propio juego, en una página especial llamada _**tutorial**_. No dude en acceder a ella para más información. 
 
 ## Otros
 
-<!-- Añádir imagen del foot de la página con el github, correo, abb web page -->
+![Contacto](/assets/png/contacto.png)
 
 Puede contactar con nosotros, acceder al repositorio oficial, o ver más información sobre los robots ABB a través de los enlaces que se dejan en la web. Por favor, no dude en visitarlos o en contactar con nosotros. 
 

@@ -1,5 +1,7 @@
 # Tic Tac Toe 
 
+![Demo Tic Tac Toe](/assets/gif/Robotstudio1%20(online-video-cutter.com)%20(1).gif)
+
 ## Índice
 1. [Índice](#índice)
 2. [Instalación](#instalación-y-ejecución)
@@ -92,7 +94,3 @@ Se ha optado por definir un tablero con 2 jugadores, teniendo cada uno 5 fichas,
 La siguiente clase permite gestionar la comunicación Interfaz-Robot: 
 
   - TCP -> Trabaja con el protocolo de comunicación empleado, implementa la parte cliente. Se conecta al socket cuando se desea enviar un mensaje, se codifica este y se envía y recibe el mensaje de confimación del servidor, tambíen permite la recepción y decodificación de los datos.
-  
-
-
-  
