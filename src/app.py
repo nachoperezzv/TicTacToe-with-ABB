@@ -152,7 +152,7 @@ def resetBoard():
 if __name__ == '__main__':
     app.debug = True
     app.run(
-        host="0.0.0.0",
+        host="172.20.10.6",
         port=5000,        
     )
 
