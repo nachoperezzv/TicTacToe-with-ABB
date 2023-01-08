@@ -1,5 +1,7 @@
 # Tic Tac Toe 
 
+![Demo Tic Tac Toe](/assets/gif/Robotstudio1%20(online-video-cutter.com)%20(1).gif)
+
 ## Índice
 1. [Índice](#índice)
 2. [Instalación](#instalación-y-ejecución)
