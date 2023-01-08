@@ -1,3 +1,4 @@
+from time import sleep
 from utils import Tablero
 from utils import Player
 from utils import ThreeInRow
@@ -147,6 +148,7 @@ def move():
 
                 if isinstance(msg, str):
                     response = re.split(r';', msg)
+                    sleep(1)
                     tcp.mysend(msg)
             else: 
                 response = {"Game Over":"end"}
@@ -178,8 +180,7 @@ def resetBoard():
 
         collect_player1 = re.split(r';', end_positions)
         if end_positions != None: 
-            tcp.mysend(collect_player1[0])
-            tcp.mysend(collect_player1[1])
+            tcp.mysend(collect_player1[0] + " " + collect_player1[1])
         else: logging.error('No es posible recoger las fichas del tablero')
 
         return set_response(dict(msg='ok'))
@@ -191,7 +192,7 @@ def resetBoard():
 if __name__ == '__main__':
     app.debug = True
     app.run(
-        host="0.0.0.0",
+        host="172.20.10.6",
         port=5000,        
     )
 

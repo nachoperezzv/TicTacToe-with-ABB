@@ -22,7 +22,7 @@ document.querySelector('#playmode-oneplayer-btn').onclick = () => {
   mode = '1';
   let data = {GameMode: mode};
 
-  fetch('http://localhost:5000/play/GameMode', {
+  fetch('http://172.20.10.6:5000/play/GameMode', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -42,7 +42,7 @@ document.querySelector('#playmode-twoplayers-btn').onclick = () => {
   mode = '2';
   let data = {GameMode: mode};
 
-  fetch('http://localhost:5000/play/GameMode', {
+  fetch('http://172.20.10.6:5000/play/GameMode', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -171,7 +171,7 @@ function getMove(event){
   let data = {player: p,
               position: pos};
 
-  fetch('http://localhost:5000/play/move', {
+  fetch('http://172.20.10.6:5000/play/move', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -263,7 +263,7 @@ function getSpeechMove(lastCoordinate){
         position: lastCoordinate};
       
       if (cellToAddToken.innerHTML == ''){
-        fetch('http://localhost:5000/play/move', {
+        fetch('http://172.20.10.6:5000/play/move', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
@@ -497,7 +497,7 @@ function makeMove(event) {
   let data = {player: p,
               position: pos};
 
-  fetch('http://localhost:5000/play/move', {
+  fetch('http://172.20.10.6:5000/play/move', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
